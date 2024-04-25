@@ -1,23 +1,26 @@
 ---
-title: "AWS Modernization Workshop Base Template" # MODIFY THIS TO BE THE TITLE OF YOUR WORKSHOP
+title: "AWS Modernization with Nirmata"
 chapter: true
 weight: 1
 ---
 
-# AWS Modernization Workshop Base Template <!-- CHANGE THIS TO BE THE TITLE OF YOUR WORKSHOP -->
+# Governance and Compliance with Nirmata 
 <br>
-![Partner Logo](/images/AWS_Logo.png)  <!-- ADD YOUR PARTNER LOGO HERE USING THE INSTRUCTIONS BELOW -->
+![Partner Logo](/images/nirmata-logo-white.svg) 
 <br>
 
 ## Welcome
 
-**REMOVE:** By utilizing this template, you can create your workshops with little coding knowledge. These workshops use the Hugo Framework and the hugo-theme-learn submodules. By writing content using simple markdown code, Hugo creates the necessary HTML for you. Examples of code, files, and folders here can be modified, copied, pasted, and deleted as necessary. Block sections of instruction that should be removed will be explicitly marked with **REMOVE**. Other sections should be modified to reflect the workshop. For guidance on how to utilize the Hugo framework and markdown, please refer to the module titled "Hugo Framework And Markdown". That module can be removed once building the workshop is complete.
+Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of Kyverno, Nirmata Policy Manager simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
 
-This paragraph block can give the high level overview of the learning goals and use cases of what the workshop is trying to teach.
+Key Benefits
+* Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowdsourced or custom-developed policies.
+* Policy-as-Code: Easily manage policies through their entire lifecycle, ensuring consistent deployment and governance.
+* Policy Reporting and Alerts: Gain insights on the effectiveness of policy through reporting and contextual correlation and insight engine.
+* Continuous Compliance: Protect the software supply chain with continuous compliance through policies as a standard part of the DevOps pipeline.
+* Collaboration: Leverage existing processes and workflows by integrating with tools like Git, Slack, Jira, and others
 
-This paragraph block can be used to introduce the company and how the solution being taught addresses specific issues.
-
-**REMOVE:** Every introduction page should include the following warning label.
+The content is COMING SOON!
 
 {{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
