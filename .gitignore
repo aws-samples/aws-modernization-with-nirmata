@@ -1,3 +1,4 @@
+public/
 *.swp
 *.*~
 project.lock.json

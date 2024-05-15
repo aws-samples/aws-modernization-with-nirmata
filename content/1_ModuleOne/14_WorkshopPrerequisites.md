@@ -10,12 +10,6 @@ weight: 4 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICAB
 
 This paragraph block should be an introduction to the submodule. Are there any prerequisites the user must perform to begin the workshop? Do they need to sign up for any external accounts or install any tools? An example of content guidance can be found at the bottom of this page.
 
-{{% notice info %}}
-<p style='text-align: left;'>
-**REMOVE:** With the exception of _index.md, the module folders and filenames should be changed to better reflect their content, i.e. 1_Planning as the folder and 11_HowToBegin as the first submodule. Changing the "weight" value of the header is ultimately what reflects the order the modules are presented.
-</p>
-{{% /notice %}}
-
 ### Next Section Heading <!-- MODIFY THIS HEADING -->
 This paragraph block can optionally be utilized to lead into the next section of the workshop.
 

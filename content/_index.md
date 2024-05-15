@@ -4,9 +4,9 @@ chapter: true
 weight: 1
 ---
 
-# Governance and Compliance with Nirmata 
+# Governance and Compliance with Nirmata
 <br>
-![Partner Logo](/images/nirmata-logo-white.svg) 
+![Partner Logo](/images/nirmata-logo-white.svg)
 <br>
 
 ## Welcome
