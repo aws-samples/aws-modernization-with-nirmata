@@ -5,9 +5,7 @@ weight: 1
 ---
 
 # Governance and Compliance with Nirmata
-<br>
-![Partner Logo](/images/nirmata-logo-white.svg)
-<br>
+![image](/images/nirmata-logo-white.svg)
 
 ## Welcome
 
@@ -17,7 +15,7 @@ Misconfigurations are the leading cause of security issues in Kubernetes. Elimin
 ![image](/images/NPMK-1.png)
 
 Key Benefits
-* Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowdsourced or custom-developed policies.
+* Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowd-sourced or custom-developed policies.
 * Policy-as-Code: Easily manage policies through their entire lifecycle, ensuring consistent deployment and governance.
 * Policy Reporting and Alerts: Gain insights on the effectiveness of policy through reporting and contextual correlation and insight engine.
 * Continuous Compliance: Protect the software supply chain with continuous compliance through policies as a standard part of the DevOps pipeline.
