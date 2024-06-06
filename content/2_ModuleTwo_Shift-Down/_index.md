@@ -14,5 +14,6 @@ The platform or security team admins are responsible for defining the policies t
 
 User who wants to make any changes to the manifests in these repositories will create a pull request (PR). CI pipelines are configured to trigger on various actions, such as, creating a PR, merging the code to main branch, or even setup to run at regular intervals.
 
-## Setting up the CI Pipeline
-NCTL works with any CI pipeline (GitHub Action, GitLab CI, Jenkins, Harness CI, etc.).
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}

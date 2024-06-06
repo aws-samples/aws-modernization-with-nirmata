@@ -66,3 +66,7 @@ To view the scan reports:
 6. Go back to the previous page and click on the **Files** tab to view the list of impacted files. The files are listed with information detailing the Status of the file with *Failed, Warning, Passed, Error, and Skip* and the number of violations that has impacted the file. The files can be viewed in different branches of the repository and can be filtered according to the type and status of the file.
 
 ![image](/images/view_file.png)
+
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}

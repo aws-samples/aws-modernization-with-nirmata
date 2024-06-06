@@ -29,3 +29,7 @@ For the purposes of this tutorial, click the **Get Started** button.
 The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NPM and then working with the systems within the framework, by monitoring the cluster details and policy violations.
 
 <img src="/images/register.jpg" width="400" />
+
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}

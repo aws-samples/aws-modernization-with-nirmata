@@ -67,3 +67,7 @@ To view the Compliance Report per Namespace:
 6. The page contains the report for `Controls` for the given compliance standard with information related to the Control names, their status, the pass percentage, the number of fail, warn, and pass results, the type of the Controls, and whether the controls are enabled.
 
 ![image](/images/compliance_details.png)
+
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}

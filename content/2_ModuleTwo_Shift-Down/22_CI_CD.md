@@ -91,3 +91,6 @@ To have a look at the scan report in NPM:
 
 3. Click on the repository hyperlink to get a detailed view of the scanned report.
 
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}
