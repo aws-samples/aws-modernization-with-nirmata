@@ -6,10 +6,6 @@ weight: 1
 
 # Introduction
 
-## Learning Objectives <!-- MODIFY THIS SUBHEADING -->
-
-This paragraph block should highlight the learning objectives of the workshop. A bulleted list works well for this purpose.
-
 ## Workshop Structure
 
 * Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowd-sourced or custom-developed policies.
