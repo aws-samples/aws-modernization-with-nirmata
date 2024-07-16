@@ -1,7 +1,7 @@
 ---
 title: "Shift-Down with nctl" # MODIFY THIS TITLE IF APPLICABLE
 chapter: true
-weight: 2
+weight: 40
 ---
 
 ## Pipeline Scanning Workflow
@@ -13,6 +13,8 @@ weight: 2
 The platform or security team admins are responsible for defining the policies that an organization needs to adhere to. They are stored as YAML files in Git repositories or as OCI images in the OCI registry, or also are made available as Helm charts. The DevOps user or the IT team is responsible for managing the configuration files, be it a Kubernetes manifest, or an IaC file, or any JSON spec stored in Git repositories.
 
 User who wants to make any changes to the manifests in these repositories will create a pull request (PR). CI pipelines are configured to trigger on various actions, such as, creating a PR, merging the code to main branch, or even setup to run at regular intervals.
+
+{{% children %}}
 
 {{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.

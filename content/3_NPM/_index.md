@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 chapter: true
-weight: 1
+weight: 30
 ---
 
 # Introduction
@@ -13,6 +13,8 @@ weight: 1
 * Policy Reporting and Alerts: Gain insights on the effectiveness of policy through reporting and contextual correlation and insight engine.
 * Continuous Compliance: Protect the software supply chain with continuous compliance through policies as a standard part of the DevOps pipeline.
 * Collaboration: Leverage existing processes and workflows by integrating with tools like Git, Slack, Jira, and others
+
+{{% children %}}
 
 {{% notice warning %}}
 The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.

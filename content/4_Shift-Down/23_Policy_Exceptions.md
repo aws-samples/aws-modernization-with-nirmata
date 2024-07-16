@@ -1,7 +1,7 @@
 ---
 title: "Exception Management" # MODIFY THIS TITLE
 chapter: true
-weight: 3 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+weight: 43 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
 ---
 
 Policy exceptions are temporary deviations that are required when following the policy practices might not be possible because it can hinder operational needs.

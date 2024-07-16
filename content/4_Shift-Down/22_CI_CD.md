@@ -1,7 +1,7 @@
 ---
 title: "CI/CD Pipelines" # MODIFY THIS TITLE
 chapter: true
-weight: 2 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+weight: 42 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
 ---
 
 ## Pipeline Actions

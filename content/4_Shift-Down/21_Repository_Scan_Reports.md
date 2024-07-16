@@ -1,7 +1,7 @@
 ---
 title: "Repository Scan Reports" # MODIFY THIS TITLE
 chapter: true
-weight: 1 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+weight: 41 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
 ---
 
 Repository scan reports provide deep insights on the performance of different repositories containing configuration files.

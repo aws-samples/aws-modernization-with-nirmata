@@ -1,7 +1,7 @@
 ---
 title: "Cluster On-boarding" # MODIFY THIS TITLE
 chapter: true
-weight: 2 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICABLE
+weight: 32 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICABLE
 ---
 
 To onboard a cluster with Nirmata,
