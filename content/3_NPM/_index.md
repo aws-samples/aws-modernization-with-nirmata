@@ -4,9 +4,7 @@ chapter: true
 weight: 30
 ---
 
-# Introduction
-
-## Workshop Structure
+## Introduction
 
 * Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowd-sourced or custom-developed policies.
 * Policy-as-Code: Easily manage policies through their entire lifecycle, ensuring consistent deployment and governance.
