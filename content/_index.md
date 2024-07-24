@@ -5,7 +5,7 @@ weight: 1
 ---
 
 # Governance and Compliance with Nirmata
-![image](/images/nirmata-logo-white.svg)
+![image](/images/nirmata-logo-horizontal-small.png)
 
 ## Welcome
 
