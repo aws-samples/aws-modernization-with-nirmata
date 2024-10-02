@@ -1,13 +1,14 @@
 ---
-title: "Repository Scan Reports" # MODIFY THIS TITLE
-chapter: true
-weight: 41 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+title: "Repository Scan Reports" 
+chapter: false
+weight: 41 
 ---
 
 Repository scan reports provide deep insights on the performance of different repositories containing configuration files.
 
-## Publishing Repository Scan Results to NPM
-### Admin User
+### Publishing Repository Scan Results to NPM
+
+#### Admin User
 Login to the NPM tenant with the user's API Key.
 ```
 nctl login --url https://nirmata.io --userid admin@acme.corp --token <admin-api-key>
@@ -23,7 +24,7 @@ Run the repo scan command
 nctl scan repository ./nctl-shift-left --policy-sets pss-baseline
 ```
 
-### DevOps User
+#### DevOps User
 Login to the NPM tenant with the user's API Key.
 ```
 nctl login --url https://nirmata.io --userid user@acme.corp --token <user-api-key>
@@ -45,7 +46,7 @@ nctl scan repository ./nctl-shift-left --policy-sets pss-baseline --publish-toke
 
 The scan reports are generated after the results from [Github scan action](https://docs.nirmata.io/npmk/workflows/github-action/) gets pushed to NPM.
 
-## Viewing Repository Scan Reports in NPM
+### Viewing Repository Scan Reports in NPM
 
 To view the scan reports:
 

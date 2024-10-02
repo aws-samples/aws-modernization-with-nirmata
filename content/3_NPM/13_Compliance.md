@@ -1,7 +1,7 @@
 ---
-title: "Compliance" # MODIFY THIS TITLE
-chapter: true
-weight: 33 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICABLE
+title: "Compliance" 
+chapter: false
+weight: 33 
 ---
 
 ## Cluster Compliance

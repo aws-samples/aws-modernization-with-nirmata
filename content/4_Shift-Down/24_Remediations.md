@@ -1,7 +1,7 @@
 ---
-title: "Remediation" # MODIFY THIS TITLE
-chapter: true
-weight: 44 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+title: "Remediation" 
+chapter: false
+weight: 44 
 ---
 
 Remediations are possible fixes that are suggested for Kubernetes resources when they have a violation against the best practices policies. They are shown in the form of a suggested resource that are generated through annotations existing within the best practices policies.
@@ -22,7 +22,7 @@ policies.nirmata.io/remediation: "https://github.com/nirmata/kyverno-policies/tr
 
 ![image](/images/remediation_diffs2.png)
 
-## Remediation in Policy Reports
+### Remediation in Policy Reports
 
 To view Remediations in Policy Reports:
 

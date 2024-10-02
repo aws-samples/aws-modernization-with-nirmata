@@ -1,13 +1,25 @@
 ---
-title: "Cluster On-boarding" # MODIFY THIS TITLE
-chapter: true
-weight: 32 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICABLE
+title: "Cluster onboarding" 
+chapter: false
+weight: 32 
 ---
 
+After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that NPM will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish. There are two buttons at the bottom of the page. One listed as See Features and the other listed as Get Started.
+
+For the purposes of this tutorial, click the **Get Started** button.
+
+The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NPM and then working with the systems within the framework, by monitoring the cluster details and policy violations.
+
+<img src="/images/register.jpg" width="400" />
+
+{{% notice warning %}}
+The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
+{{% /notice %}}
+
+## Cluster Onboarding
 To onboard a cluster with Nirmata,
  Click on the `Add Cluster` button on the `Clusters` panel. If you are trying out NPM for the first time, it is highly recommended to use the default onboarding process instead of the manual onboarding flow.
 
-## Cluster Onboarding
 This workflow requires `nctl`. Refer to the [documentation](https://docs.nirmata.io/nctl/) for installation.
 
 Enter the cluster name (required) and labels (optional).

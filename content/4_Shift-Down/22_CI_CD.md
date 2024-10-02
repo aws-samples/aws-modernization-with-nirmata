@@ -1,16 +1,16 @@
 ---
-title: "CI/CD Pipelines" # MODIFY THIS TITLE
-chapter: true
-weight: 42 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES
+title: "CI/CD Pipelines" 
+chapter: false
+weight: 42 
 ---
 
-## Pipeline Actions
+### Pipeline Actions
 
 The platform or security team admins are responsible for defining the policies that an organization needs to adhere to. They are stored as YAML files in Git repositories or as OCI images in the OCI registry, or also are made available as Helm charts. The DevOps user or the IT team is responsible for managing the configuration files, be it a Kubernetes manifest, or an IaC file, or any JSON spec stored in Git repositories.
 
 User who wants to make any changes to the manifests in these repositories will create a pull request (PR). CI pipelines are configured to trigger on various actions, such as, creating a PR, merging the code to main branch, or even setup to run at regular intervals.
 
-### Understanding the GitHub Action Workflow
+#### Understanding the GitHub Action Workflow
 
 A dedicated GitHub Action is available through the [GitHub marketplace](https://github.com/marketplace/actions/nctl-scan-installer). With this action, `nctl scan` can be used in the GitHub actions workflows to scan the configuration files present in the repository against the policies that are defined centrally. In case of a failure, the entire action can be configured to fail, meaning that the test pipeline will fail, and the users will get quick feedback for their changes. The results of the scan are available in NPM for viewing. NPM provides insights to platform administrators on overall governance of different code repositories in their organization.
 
@@ -39,7 +39,7 @@ Perform repository scan.
 
 `Nctl` works with the Jenkins CI pipeline and can be used in the Jenkins workflow to scan the configuration files present in a repository against the centrally defined policies. The Jenkins job will trigger the scanning of the files and if unsuccessful, the entire job will fail, which will prompt the user with feedback for their changes. Upon successful completion of the job, the scan results will be published to the NPM for viewing. NPM provides insights to platform administrators on overall governance of different code repositories in their organization.
 
-### Understanding the Jenkins Workflow
+#### Understanding the Jenkins Workflow
 
 To see pipeline scanning with Jenkins CI in action:
 
@@ -78,7 +78,7 @@ To see pipeline scanning with Jenkins CI in action:
 
 9. Scroll down to the end of the page to verify the publishing of the report to the NPM tenant.
 
-## View Scan Reports in NPM
+### View Scan Reports in NPM
 
 By default, the results of the scan action are published to NPM. This allows administrators to govern their repositories alongside clusters and namespaces.
 

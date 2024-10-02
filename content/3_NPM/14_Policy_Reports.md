@@ -1,7 +1,7 @@
 ---
-title: "Policy Reports" # MODIFY THIS TITLE IF APPLICABLE
-chapter: true
-weight: 34 # MODIFY THIS VALUE TO REFLECT THE ORDERING OF THE MODULES IF APPLICABLE
+title: "Policy Reports" 
+chapter: false
+weight: 34 
 ---
 
 ## Cluster Policy Reports

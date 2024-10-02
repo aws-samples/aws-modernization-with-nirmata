@@ -1,13 +1,19 @@
 ---
-title: "Environment Setup"
+title: "Prerequisites"
 chapter: true
-weight: 10
+weight: 1
 ---
 
-# Running the workshop on your own
+For this workshop you will need AWS account and Nirmata account. Below steps will provide you instructions how to setup both.
 
-{{% notice warning %}}
-Only complete this section if you are running the workshop on your own. If you are at an AWS hosted event (such as re:Invent, KubeCon, Immersion Day, etc) follow your instructor's instructions.
-{{% /notice %}}
+### AWS Account
 
-{{% children %}}
+To start the workshop, follow one of the following depending on whether you are:
+
+
+- [At AWS Event](aws_event/11_at_aws_event.html)
+- [Self-paced](self_paced/_index.html)
+
+### Getting Started and Nirmata account
+
+Once you have completed with either setup, continue to [Getting Started](13_getting_started.html) and [Nirmata account](14_nirmata_account.html)
