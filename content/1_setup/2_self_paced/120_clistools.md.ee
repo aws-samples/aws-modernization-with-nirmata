@@ -1,0 +1,65 @@
+---
+title: "Install CLI Tools"
+chapter: false
+weight: 22
+---
+
+Amazon EKS clusters require kubectl and kubelet binaries and the aws-cli or aws-iam-authenticator
+binary to allow IAM authentication for your Kubernetes cluster.
+
+{{% notice tip %}}
+In this workshop we will give you the commands to download the Linux binaries. If you are running Mac OSX / Windows, please [see the official EKS docs for the download links.](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
+{{% /notice %}}
+
+#### Install jq, envsubst (from GNU gettext utilities) and bash-completion
+
+```bash
+sudo yum -y install jq gettext bash-completion moreutils
+```
+
+#### Install yq for yaml processing
+
+```bash
+echo 'yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
+}' | tee -a ~/.bashrc && source ~/.bashrc
+```
+
+#### Verify the binaries are in the path and executable
+
+```bash
+for command in kubectl eksctl jq envsubst aws
+  do
+    which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
+  done
+```
+
+#### Enable kubectl bash_completion
+
+```bash
+kubectl completion bash >>  ~/.bash_completion
+. /etc/profile.d/bash_completion.sh
+. ~/.bash_completion
+```
+
+#### Enable eksctl bash-completion
+
+```bash
+eksctl completion bash >> ~/.bash_completion
+. /etc/profile.d/bash_completion.sh
+. ~/.bash_completion
+```
+
+#### Set the AWS Load Balancer Controller version
+
+```bash
+echo 'export LBC_VERSION="v2.8.1"' >>  ~/.bash_profile
+echo 'export LBC_CHART_VERSION="1.7.1"' >>  ~/.bash_profile
+.  ~/.bash_profile
+```
+
+#### Install the Helm CLI
+
+```sh
+curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+```
