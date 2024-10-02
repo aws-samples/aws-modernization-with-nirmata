@@ -16,4 +16,4 @@ To start the workshop, follow one of the following depending on whether you are:
 
 ### Getting Started and Nirmata account
 
-Once you have completed with either setup, continue to [Getting Started](11_getting_started.html) and [Nirmata account](14_nirmata_account.html)
+Once you have completed with either setup, continue to [Getting Started](../3_NPM/11_Getting_Started.md) and [Nirmata account](14_nirmata_account.html)
