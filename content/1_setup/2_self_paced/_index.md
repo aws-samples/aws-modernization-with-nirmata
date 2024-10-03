@@ -7,7 +7,7 @@ weight: 20
 If you prefer to run the workshop in your own account and\or at your own pace, please follow below instructions. 
 
 {{% notice info %}}
-If you don't have AWS account and want to create one, please follow [Create AWS account](./120_new_aws_account.md)
+If you don't have AWS account and want to create one, please follow [Create AWS account](2_self_paced/12_new_aws_account.html)
 {{% /notice %}}
 
 Please follow the instructions at EKS workshop to:
