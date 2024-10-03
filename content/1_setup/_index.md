@@ -16,4 +16,4 @@ To start the workshop, follow one of the following depending on whether you are:
 
 ### Getting Started and Nirmata account
 
-Once you have completed with either setup, continue to [Components Setup](./3_components_setup/_index.md) and [Nirmata account](./14_nirmata_account.md)
+Once you have completed with either setup, continue to [Components Setup](./3_components_setup.html) and [Nirmata account](./14_nirmata_account.md)
