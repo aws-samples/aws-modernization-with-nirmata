@@ -19,5 +19,5 @@ kubectl get nodes # if we see our 3 nodes, we know we have authenticated correct
 
 - Verify AWS auth map
 ```
-kubectl describe configmap -n kube-system aws-auth`
+kubectl describe configmap -n kube-system aws-auth
 ```
