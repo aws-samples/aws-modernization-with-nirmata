@@ -10,7 +10,7 @@ weight: 60
 The [Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver](https://www.eksworkshop.com/beginner/170_statefulset/ebs_csi_driver/#:~:text=Amazon%20Elastic%20Block%20Store%20(Amazon%20EBS)%20Container%20Storage%20Interface%20(CSI)%20driver) provides a [CSI interface](https://www.eksworkshop.com/beginner/170_statefulset/ebs_csi_driver/#:~:text=The%20Container%20Storage%20Interface) that allows Amazon Elastic Kubernetes Service (Amazon EKS) clusters to manage the lifecycle of Amazon EBS volumes for persistent volumes. This step is required if your Amazon EKS cluster version is 1.23 and above.
 {{% /notice %}}
 
-We need to Create the IAM role needed for the EBS CSI driver addon. The command below will complete this for us.
+We need to Create the IAM role needed for the EBS CSI driver addon. The command below will complete this for us:
 
 ```bash
 prepare-environment fundamentals/storage/ebs
