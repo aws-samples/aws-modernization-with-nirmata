@@ -14,5 +14,5 @@ Please follow the instructions at EKS workshop to:
 - [Setup in your AWS account](https://www.eksworkshop.com/docs/introduction/setup/your-account/) to provision resources needed for current workshop (permissions for EKS etc)
 - Create EKS cluster [Using eksctl](https://www.eksworkshop.com/docs/introduction/setup/your-account/using-eksctl) 
 
-Once completed, please return [here]([here](https://nirmata.awsworkshop.io/1_setup.html)) for next steps!
+Once completed, please navigate to the [Components setup](https://nirmata.awsworkshop.io/1_setup/3_components_setup.html) for next steps!
 
