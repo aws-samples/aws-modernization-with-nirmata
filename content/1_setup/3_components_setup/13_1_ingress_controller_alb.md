@@ -38,3 +38,20 @@ helm upgrade --install aws-load-balancer-controller eks-charts/aws-load-balancer
   --set "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"="$LBC_ROLE_ARN" \
   --wait
 ```
+
+Once successfully installed, you should see similar output below.
+
+```bash
+Release "aws-load-balancer-controller" does not exist. Installing it now.
+NAME: aws-load-balancer-controller
+LAST DEPLOYED: Fri Oct  4 19:35:37 2024
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+AWS Load Balancer controller installed!
+```
+
+Navigate to the next section to install the Amazon EBS CSI Driver.
+
