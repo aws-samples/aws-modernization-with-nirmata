@@ -4,16 +4,6 @@ chapter: true
 weight: 1
 ---
 
-For this workshop you will need AWS account and Nirmata account. Below steps will provide you instructions how to setup both.
+To start the workshop, Click on "at an AWS event" in the drop-down or Next for Self-Paced Instructions.
 
-### AWS Account
-
-To start the workshop, follow one of the following depending on whether you are:
-
-
-- [At AWS Event](1_setup/1_aws_event/11_at_aws_event.html)
-- [Self-paced](1_setup/2_self_paced/_index.html)
-
-### Getting Started and Nirmata account
-
-Once you have completed with either setup, continue to [Components Setup](./3_components_setup.html) and [Nirmata account](./14_nirmata_account.md)
+{{% children showhidden="false" %}}
