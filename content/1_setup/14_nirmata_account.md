@@ -4,7 +4,7 @@ chapter: false
 weight: 70
 ---
 
-Visit [Nirmata Signup](https://nirmata.io/security/signup.html) to register for a free 15-day trial account.
+Visit [Nirmata Signup](https://nirmata.io/security/signup.html) to register for a free 15-day trial account. Be sure to select the Nirmata Policy Manager Product.
 
 ### Activating Account
 
