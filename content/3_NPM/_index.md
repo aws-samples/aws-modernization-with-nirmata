@@ -6,7 +6,7 @@ weight: 30
 
 ## Account Provisioning
 
-Visit [nirmata.io](https://nirmata.io) and register for a trial account.
+Visit [nirmata.io](https://nirmata.io/security/signup.html) and register for a trial account.
 
 ## Activating Account
 
