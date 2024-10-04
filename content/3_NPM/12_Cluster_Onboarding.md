@@ -20,7 +20,38 @@ The examples and sample code provided in this workshop are intended to be consum
 To onboard a cluster with Nirmata,
  Click on the `Add Cluster` button on the `Clusters` panel. If you are trying out NPM for the first time, it is highly recommended to use the default onboarding process instead of the manual onboarding flow.
 
-This workflow requires `nctl`. Refer to the [documentation](https://docs.nirmata.io/docs/nctl/installation/) for installation.
+This workflow requires `nctl`. 
+
+Lets install nctl on our instance:
+
+Download the correct nctl file
+```bash
+curl -LO https://dl.nirmata.io/nctl/nctl_4.2.2-rc.1/nctl_4.2.2-rc.1_linux_amd64.zip
+```
+Unzip and add proper permissions:
+
+```bash
+unzip nctl_4.2.2-rc.1_linux_amd64.zip
+chmod +x nctl
+sudo mv nctl /usr/local/bin/nctl
+```
+
+Verify the installation
+```bash
+nctl version
+```
+
+Output should look similar to below as the version may have been updated since this publishing:
+
+```bash
+nctl version
+Version: 4.2.2-rc.1
+Time: 2024-08-29T10:31:21Z
+Git commit ID: a1e9e917d27b314ffd9255b4486c5ce4f8c5c41c
+```
+
+You can also refer to the [documentation](https://docs.nirmata.io/docs/nctl/installation/) for installation.
+
 
 Enter the cluster name (required) and labels (optional).
 
