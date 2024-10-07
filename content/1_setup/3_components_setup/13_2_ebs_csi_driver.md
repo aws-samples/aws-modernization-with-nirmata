@@ -33,10 +33,6 @@ Now we can take a look at what has been created in our EKS cluster by the addon.
 kubectl get daemonset ebs-csi-node -n kube-system
 ```
 Example Output:
-```
-kubectl get daemonset ebs-csi-node -n kube-system
-NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
-ebs-csi-node   3         3         3       3            3           kubernetes.io/os=linux   3d21h
-```
+![Example kubectl output for EBS CSI node](/images/eks-example-kubectl-output-ebs-csi.png)
 
-Great! Lets move on to setting up our Nirmata Account.
+Great! Lets move on to setting up our [Nirmata Account](../14_nirmata_account.html).

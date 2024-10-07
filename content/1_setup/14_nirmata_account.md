@@ -12,8 +12,8 @@ After registering for an account, the user should receive an email with instruct
 
 If the activation email is received, click the **Activate Account** button.
 
-<img src="/images/activation-email.jpg" width="500" />
+![Activation Email](/images/activation-email.jpg "width=100")
 
 This will open a web browser and take the user to a Nirmata page in order to create the user’s initial password. Supply a password meeting or exceeding the requirements listed on the page.
 
-<img src="/images/password.jpg" width="300" />
+![Password Setup](/images/password.jpg)

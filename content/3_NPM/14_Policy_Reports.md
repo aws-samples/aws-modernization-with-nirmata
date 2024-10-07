@@ -21,20 +21,26 @@ Policy Reports are automatically generated for clusters and namespaces. There is
 
 ![image](/images/policy_findings.png)
 
-4. Click on the **Scheduled Reports** button to receive the periodic email on the policy violations. To do so:<br>
-   a. Click on the **+** symbol. The Schedule Email page opens.<br>
-   b. Select a cluster and click **Next**.<br>
-   c. Select the scope by clicking on the radio button either **Cluster** or **Namespaces**.<br>
-   d. In the Sender field, enter the sender's email address.<br>
-   e. In the Recipients field, enter the recipient's email address.<br>
-   f. In the Subject field, enter the subject for the report.<br>
-   g. In the Message field, enter the email message.<br>
-   h. Click the checkbox **Schedule** and in the Schedule field, select the schedule option. The options available are: hourly, daily, weekly, and monthly.<br>
-   i. Select the day and time for daily and weekly schedulings and month for monthly schedulings.<br>
+4. Click on the **Scheduled Reports** button to receive the periodic email on the policy violations. To do so:
+
+   a. Click on the **+** symbol. The Schedule Email page opens.
+
+   b. Select a cluster and click **Next**.
+   
+   c. Select the scope by clicking on the radio button either **Cluster** or **Namespaces**.
+
+   d. In the Sender field, enter the sender's email address.
+
+   e. In the Recipients field, enter the recipient's email address.
+
+   f. In the Subject field, enter the subject for the report.
+
+   g. In the Message field, enter the email message.
+
+   h. Click the checkbox **Schedule** and in the Schedule field, select the schedule option. The options available are: hourly, daily, weekly, and monthly.
+
+   i. Select the day and time for daily and weekly schedulings and month for monthly schedulings.
+
    j. Click **Save**.
 
    ![image](/images/scheduled_policy_report.png)
-
-{{% notice warning %}}
-The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various AWS services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.
-{{% /notice %}}

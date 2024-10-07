@@ -53,5 +53,5 @@ NOTES:
 AWS Load Balancer controller installed!
 ```
 
-Navigate to the next section to install the Amazon EBS CSI Driver.
+Navigate to the next section to install the [Amazon EBS CSI Driver](13_2_ebs_csi_driver.html).
 
