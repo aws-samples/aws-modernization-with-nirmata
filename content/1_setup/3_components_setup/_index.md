@@ -15,6 +15,11 @@ Next, let's make sure you are all setup with Cloud9 or your own IDE.
 helm version --short
 ```
 
+#### Prepare our IDE environment and EKS cluster
+```sh
+prepare-environment introduction/getting-started
+```
+
 #### Check your cluster is ready and confirm your nodes
 
 ```
