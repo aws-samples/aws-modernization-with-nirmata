@@ -19,13 +19,13 @@ To onboard a cluster with Nirmata,
 This workflow requires [Nirmata Command Line Inetrfac, nctl](https://downloads.nirmata.io/nctl/downloads/). Lets install nctl on our instance. To download the correct nctl file:
 
 ```bash
-curl -LO https://dl.nirmata.io/nctl/nctl_4.2.2-rc.1/nctl_4.2.2-rc.1_linux_amd64.zip
+curl -LO https://dl.nirmata.io/nctl/nctl_4.2.3-rc.6/nctl_4.2.3-rc.6_linux_amd64.zip
 ```
 
 To unzip and add proper permissions:
 
 ```bash
-unzip nctl_4.2.2-rc.1_linux_amd64.zip
+unzip nctl_4.2.3-rc.6_linux_amd64.zip
 chmod +x nctl
 sudo mv nctl /usr/local/bin/nctl
 ```
@@ -40,9 +40,9 @@ Output should look similar to below as the version may have been updated since t
 
 ```bash
 nctl version
-Version: 4.2.2-rc.1
-Time: 2024-08-29T10:31:21Z
-Git commit ID: a1e9e917d27b314ffd9255b4486c5ce4f8c5c41c
+Version: 4.2.3-rc.6
+Time: 2024-10-05T17:31:43Z
+Git commit ID: 696cc45ea3547b5bdfd1d46b58854572596bbbed
 ```
 
 You can also refer to the [documentation](https://docs.nirmata.io/docs/nctl/installation/) for installation.
@@ -66,7 +66,7 @@ Once the command has run successfully, it will display a message notifying that:
 Validating user credentials...done!
 Wrote configuration to /home/username/.nirmata/config
 ```
-Next, copy the `nctl clusters add` command displayed in the final step from the web UI. Run this command to add your cluster to NPM.
+Next, copy the `nctl add cluster` command displayed in the final step from the web UI. Run this command to add your cluster to NPM.
 
 After running the above command, a confirmation message will be displayed, notifying that Nirmata Operator has been deployed successfully  on the cluster. Following this, the policy sets selected in the previous step will become ready.
 
