@@ -11,7 +11,7 @@ weight: 1
 
 Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of [Kyverno](https://kyverno.io/), [Nirmata Policy Manager (NPM)](https://nirmata.com/nirmata-cloud-native-policy-manager/) simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
 
-![image](/images/NPMK-1.png)
+![image](/images/1_npm_home.png)
 
 ### Key Benefits
 

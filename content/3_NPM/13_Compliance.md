@@ -9,16 +9,21 @@ weight: 33
 Kyverno policies map to one or more compliance controls and compliance standards. Policy violations are generated when a resource fails a policy rule. A compliance standard contains various controls or rules and the policies need to comply with the standard.
 
 To view the Compliance report:
-1. Go to **Menu**>**Compliance**. The Compliance Standards page with the default standards is displayed. On the top right corner of each of the standard, click on the Kebab Menu to view the options, *Details*, *Generate Report*, *Clone*, *Disable*, and *Delete*. In addition, the **Edit** option is displayed for a User Managed Standard. Select any of the options for the respective action.
-2. Click on any of the default standard, for example, CIS Benchmarks v8. The CIS Benchmarks v8 report is displayed.
+1. Go to **Menu**>**Compliance**. The Compliance Standards page with the default standards is displayed. Go to any one of the standards by clicking on the `Clusters` meter like icon inside the standard.  Click on the Kebab Menu on the top right to view the options, *Details*, *Generate Report*, *Clone*, *Disable*, and *Delete*. In addition, the **Edit** option is displayed for a User Managed Standard. Select any of the options for the respective action.
+2. Click on any of the default standard, for example, Pod Security Standards - Restricted. The Pod Security Standards - Restricted report is displayed.
 
-![image](/images/new_compliance1.png)
+![image](/images/new_compliance2.png)
 
-By default the report is for Controls. Click on the **Clusters** button to view the report for clusters. You can also view the report for All Clusters or by searching for a particular cluster in the Search field. In addition, you can filter the status and view the report for a particular status such as *pass* status.
+Each standard can show the report for `Clusters`, `Repos` and `Overall` or all of them. Click on the **Clusters** button to view the report for clusters. This view shows you the different controls and their status. To check the report for all the clusters, click on the `Clusters` tab. You can also view the report for a specific cluster by searching for a particular cluster in the Search field. In addition, you can filter the status and view the report for a particular status such as *pass* status.
 
-3. Click on the control name to see the details of the control, its status, policy mappings, and findings. Similarly by clicking on the Clusters button, you can view the cluster list and clicking on the cluster name, you can view the controls associated with it. You can also click on the control name to see the details of the control.
+3. Click on the control name to see the details of the control, its status, policy mappings, and findings. 
 
-4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When you click on the User Managed option, the Add Compliance Standard window opens.
+4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When adding the `CIS Benchmark` standards, the CIS controls mush be enabled. This can be done by going to the `Policy Reports` page and then enabling it from the top right kebab menu by clicking `Enable CIS Controls` and following the instructions provided based on the Kubernetes distribution.
+>NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
+
+![image](/images/enable_cis_benchmark1.png)
+
+5. When you click on the User Managed option, the Add Compliance Standard window opens.
 
     a. Enter *Name, Version and Description* and click **Save**. <br>
    
@@ -30,35 +35,11 @@ By default the report is for Controls. Click on the **Clusters** button to view 
     d. When you click on the Add Control button, the Add Compliance Control window opens. On this window, add **Control Details** such as Name, ID, SubID, Description, select *Cloud Providers* such as EKS, Self Managed, and etc, and add *Policy Mappings* such as Policy Name, Rule, UUID, and click **Save**.
 
     ![image](/images/add_standard.png)
-
-5. Click on the **Generate Report** button to generate a report on the standard. The Generate Report page opens.
-
-    a. In the Mail block, enter *Sender*, *Recipients*, *Subject*, *Message* details.
     
-    b. Select the **Schedule** checkbox to schedule the email. The options available are hourly, daily, weekly, and monthly.
 
-    c. Click on the **Save** button.
 
-6. Click on the **Scheduled Reports** and click on the **+** symbol to schedule a periodic email to notify any policy violations. The Schedule Email window opens. 
 
-    a. Select a cluster from the list or search the cluster and click **Next**. The Schedule Email page is displayed.
 
-    b. In the Scope block, select the radio button, either **Cluster or Namespaces** to choose the scope of the report.
-
-    c. In the Mail block, enter *Sender*, *Recipients*, *Subject*, *Message* details.
-
-    d. Select the **Schedule** checkbox to schedule the email. The options available are hourly, daily, weekly, and monthly.
-
-    e. Click on the **Save** button.
-
-7. Go to **Policies**>**Policy Reports**. Click on the Kebab Menu at the right corner of the screen. The *Enable CIS Benchmarks* option is displayed.
-
-8. Click on the **Enable CIS Benchmarks** option. A window to install kube-bench adapter is displayed. In this window you will see the instructions to execute commands to install the helm chart and run the cron job to see policy violations immediately.
->NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
-
-9. Click **OK**.
-
-    ![image](/images/enable_cis_benchmark1.png)
 
 ## Namespace Compliance
 
