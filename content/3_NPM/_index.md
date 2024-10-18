@@ -10,7 +10,7 @@ Nirmata allows enterprises to securely scale Kubernetes by enabling multi-cluste
 
 [Nirmata Policy Manager](https://docs.nirmata.io/docs/npmk/) (NPM) for Kubernetes provides enterprise grade reporting and policy lifecycle management across Kubernetes clusters. It is built on Kyverno, a CNCF project created by Nirmata.
 
-![npm dashboard](/images/npm-dashboard-new.PNG)
+![npm dashboard](/images/npm-dashboard-new.png)
 
 Nirmata Policy Manager Benefits
 
