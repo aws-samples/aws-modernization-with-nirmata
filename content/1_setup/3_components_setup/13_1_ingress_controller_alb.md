@@ -16,10 +16,10 @@ Application Load Balancers work at L7 of the OSI model, allowing you to expose K
 
 The controller enables you to simplify operations and save costs by sharing an Application Load Balancer across multiple applications in your Kubernetes cluster.
 
-Run the command below to create an IAM role required by the AWS Load Balancer Controller.
+Run the command below to create the IAM roles required for the workshop.
 
 ```sh
-prepare-environment exposing/load-balancer
+prepare-environment exposing/load-balancer && prepare-environment fundamentals/storage/ebs
 ```
 
 
