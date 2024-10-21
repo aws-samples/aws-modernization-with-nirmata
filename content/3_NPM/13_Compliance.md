@@ -18,28 +18,37 @@ Each standard can show the report for `Clusters`, `Repos` and `Overall` or all o
 
 3. Click on the control name to see the details of the control, its status, policy mappings, and findings. 
 
-4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When adding the `CIS Benchmark` standards, the CIS controls must be enabled. This can be done by going to the `Policy Reports` page and then enabling it from the top right kebab menu by clicking `Enable CIS Controls` and following the instructions provided based on the Kubernetes distribution.
+4. In the Compliance Standards page, click on the **Add Standard** button and you will see a drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. Select `CIS Amazon Elastic Kubernetes Service (EKS) Benchmark`. Next Select your newly added cluster and click `Add`. You have now successfully added your first Compliance Standard. Lets now install the Nirmata CIS Adapter.
 >NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
 
-4-a). Creating a namespace
+4-a). Installing the Nirmata CIS Adapter
+Adding the Kyverno Helm repository
+The following commands add and update the Kyverno Helm chart repository:
+
+```bash
+helm repo add nirmata https://nirmata.github.io/kyverno-charts/
+helm repo update nirmata
+```
+
+4-b). Creating a namespace
 It is recommended to install the CIS-Adapter in its own namespace. This documentation uses kube-bench as the namespace:
     
 ```bash
 kubectl create namespace kube-bench
 ```
     
-4-b). Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
+4-c). Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
 
 ```bash
 helm install kube-bench-adapter nirmata/kube-bench-adapter -n kube-bench --set kubeBench.name="cis-eks-1.2.0" --set kubeBench.kubeBenchBenchmark="eks-1.2.0" --set kubeBench.namespace="kube-bench" --set kubeBench.kubeBenchTargets="controlplane\,node\,policies\,managedservices"
 ```
-4-c). Verifying installation
+4-d). Verifying installation
 The cronjob with weekly schedule should be created and executing the below command helps you verify that:
 
 ```bash
 kubectl get cronjob -n kube-bench
 ```
-Verify policyreports creation
+4-e). Verify policyreports creation
 Check the policyreports created through the custom resource with:
 
 ```bash
