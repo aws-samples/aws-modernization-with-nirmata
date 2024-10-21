@@ -19,7 +19,7 @@ To improve security and reduce the amount of work, you can manage the Amazon EBS
 
 aws eks create-addon --cluster-name $EKS_CLUSTER_NAME --addon-name aws-ebs-csi-driver \
   --service-account-role-arn $EBS_CSI_ADDON_ROLE \
-  --configuration-values '{"defaultStorageClass":{"enabled":true}}'
+  --configuration-values '{"defaultStorageClass":{"enabled":true}}' &&
 aws eks wait addon-active --cluster-name $EKS_CLUSTER_NAME --addon-name aws-ebs-csi-driver
 ```
 Now we can take a look at what has been created in our EKS cluster by the addon. For example, a DaemonSet will be running a pod on each node in our cluster:
