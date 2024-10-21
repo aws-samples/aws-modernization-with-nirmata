@@ -18,7 +18,7 @@ Each standard can show the report for `Clusters`, `Repos` and `Overall` or all o
 
 3. Click on the control name to see the details of the control, its status, policy mappings, and findings. 
 
-4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When adding the `CIS Benchmark` standards, the CIS controls mush be enabled. This can be done by going to the `Policy Reports` page and then enabling it from the top right kebab menu by clicking `Enable CIS Controls` and following the instructions provided based on the Kubernetes distribution.
+4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When adding the `CIS Benchmark` standards, the CIS controls must be enabled. This can be done by going to the `Policy Reports` page and then enabling it from the top right kebab menu by clicking `Enable CIS Controls` and following the instructions provided based on the Kubernetes distribution.
 >NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
 
 ![image](/images/enable_cis_benchmark1.png)
