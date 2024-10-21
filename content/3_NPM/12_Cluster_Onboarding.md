@@ -4,9 +4,9 @@ chapter: false
 weight: 32 
 ---
 
-After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Policy Manager (NPM) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish. There are two buttons at the bottom of the page. One listed as See Features and the other listed as Get Started.
+After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Policy Manager (NPM) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish.
 
-For the purposes of this tutorial, click the **Get Started** button.
+Click the **Get Started** button.
 
 The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NPM and then working with the systems within the framework, by monitoring the cluster details and policy violations.
 
