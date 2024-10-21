@@ -21,7 +21,30 @@ Each standard can show the report for `Clusters`, `Repos` and `Overall` or all o
 4. In the Compliance Standards page, click on the **Add Standard** button to add a standard. A drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. When you click on the Nirmata Managed option, it gets directly added. When adding the `CIS Benchmark` standards, the CIS controls must be enabled. This can be done by going to the `Policy Reports` page and then enabling it from the top right kebab menu by clicking `Enable CIS Controls` and following the instructions provided based on the Kubernetes distribution.
 >NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
 
-![image](/images/enable_cis_benchmark1.png)
+4-a). Creating a namespace
+It is recommended to install the CIS-Adapter in its own namespace. This documentation uses kube-bench as the namespace:
+    
+```bash
+kubectl create namespace kube-bench
+```
+    
+4-b). Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
+
+```bash
+helm install kube-bench-adapter nirmata/kube-bench-adapter -n kube-bench --set kubeBench.name="cis-eks-1.2.0" --set kubeBench.kubeBenchBenchmark="eks-1.2.0" --set kubeBench.namespace="kube-bench" --set kubeBench.kubeBenchTargets="controlplane\,node\,policies\,managedservices"
+```
+4-c). Verifying installation
+The cronjob with weekly schedule should be created and executing the below command helps you verify that:
+
+```bash
+kubectl get cronjob -n kube-bench
+```
+Verify policyreports creation
+Check the policyreports created through the custom resource with:
+
+```bash
+kubectl get clusterpolicyreports -n kube-bench
+```
 
 5. When you click on the User Managed option, the Add Compliance Standard window opens.
 
