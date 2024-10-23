@@ -19,7 +19,7 @@ Each standard can show the report for `Clusters`, `Repos` and `Overall` or all o
 3. Click on the control name to see the details of the control, its status, policy mappings, and findings. 
 
 4. In the Compliance Standards page, click on the **Add Standard** button and you will see a drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. Select `CIS Amazon Elastic Kubernetes Service (EKS) Benchmark`. Next Select your newly added cluster and click `Add`. You have now successfully added your first Compliance Standard. Lets now install the Nirmata CIS Adapter.
->NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
+NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
 
     a). Installing the Nirmata CIS Adapter
     Adding the Kyverno Helm repository
