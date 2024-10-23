@@ -21,7 +21,8 @@ Each standard can show the report for `Clusters`, `Repos` and `Overall` or all o
 4. In the Compliance Standards page, click on the **Add Standard** button and you will see a drop-down list of Nirmata Managed Standards and a menu to add User Managed Standard are displayed. Select `CIS Amazon Elastic Kubernetes Service (EKS) Benchmark`. Next Select your newly added cluster and click `Add`. You have now successfully added your first Compliance Standard. Lets now install the Nirmata CIS Adapter.
 NOTE: Installing kube-bench adapter prompts the user to check policy reports and report CIS Benchmark violations on a weekly schedule.
 
-    a). Installing the Nirmata CIS Adapter
+    a). #### Installing the Nirmata CIS Adapter
+   
     Adding the Kyverno Helm repository
     The following commands add and update the Kyverno Helm chart repository:
 
@@ -30,25 +31,28 @@ NOTE: Installing kube-bench adapter prompts the user to check policy reports and
     helm repo update nirmata
     ```
 
-    b). Creating a namespace
+    b). #### Creating a namespace
+   
     It is recommended to install the CIS-Adapter in its own namespace. This documentation uses kube-bench as the namespace:
     
     ```bash
     kubectl create namespace kube-bench
     ```
     
-    c). Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
+    c). #### Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
 
     ```bash
     helm install kube-bench-adapter nirmata/kube-bench-adapter -n kube-bench --set kubeBench.name="cis-eks-1.2.0" --set kubeBench.kubeBenchBenchmark="eks-1.2.0" --set kubeBench.namespace="kube-bench" --set     kubeBench.kubeBenchTargets="controlplane\,node\,policies\,managedservices"
     ```
-    d). Verifying installation
+    d). #### Verifying installation
+   
     The cronjob with weekly schedule should be created and executing the below command helps you verify that:
 
     ```bash
     kubectl get cronjob -n kube-bench
     ```
-    e). Verify policyreports creation
+    e). #### Verify policyreports creation
+   
     Check the policyreports created through the custom resource with:
 
     ```bash
