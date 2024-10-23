@@ -14,7 +14,7 @@ User who wants to make any changes to the manifests in these repositories will c
 
 A dedicated GitHub Action is available through the [GitHub marketplace](https://github.com/marketplace/actions/nctl-scan-installer). With this action, `nctl scan` can be used in the GitHub actions workflows to scan the configuration files present in the repository against the policies that are defined centrally. In case of a failure, the entire action can be configured to fail, meaning that the test pipeline will fail, and the users will get quick feedback for their changes. The results of the scan are available in NPM for viewing. NPM provides insights to platform administrators on overall governance of different code repositories in their organization.
 
-To have a look at the workflow manifest file, refer to the `scan-outputs.yaml` file in the `.github/workflows` section of the **nctl-shift-left** [Github repository](https://github.com/nirmata/nctl-shift-left/).
+To have a look at the workflow manifest file, refer to the `scan-outputs.yaml` file in the `.github/workflows` section of the **nctl-shift-left** [Github repository](https://github.com/nsagark/nctl-shift-left/).
 
 Use the readily available `nctl` action.
 
