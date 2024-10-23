@@ -31,7 +31,7 @@ NOTE: Installing kube-bench adapter prompts the user to check policy reports and
     helm repo update nirmata
     ```
 
-    b). #### Creating a namespace
+    b). Creating a namespace.
    
     It is recommended to install the CIS-Adapter in its own namespace. This documentation uses kube-bench as the namespace:
     
@@ -39,19 +39,19 @@ NOTE: Installing kube-bench adapter prompts the user to check policy reports and
     kubectl create namespace kube-bench
     ```
     
-    c). #### Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
+    c). Install the CIS-Adapter for EKS from nirmata helm repo in the kube-bench namespace, with desired parameters using:
 
     ```bash
     helm install kube-bench-adapter nirmata/kube-bench-adapter -n kube-bench --set kubeBench.name="cis-eks-1.2.0" --set kubeBench.kubeBenchBenchmark="eks-1.2.0" --set kubeBench.namespace="kube-bench" --set     kubeBench.kubeBenchTargets="controlplane\,node\,policies\,managedservices"
     ```
-    d). #### Verifying installation
+    d). Verifying installation.
    
     The cronjob with weekly schedule should be created and executing the below command helps you verify that:
 
     ```bash
     kubectl get cronjob -n kube-bench
     ```
-    e). #### Verify policyreports creation
+    e). Verify policyreports creation.
    
     Check the policyreports created through the custom resource with:
 
