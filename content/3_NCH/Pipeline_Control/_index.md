@@ -1,7 +1,7 @@
 ---
 title: "Pipeline Control Point"
 chapter: true
-weight: 40
+weight: 20
 ---
 
 ## Pipeline Scanning Workflow

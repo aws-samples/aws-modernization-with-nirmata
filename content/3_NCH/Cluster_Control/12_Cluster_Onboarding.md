@@ -1,7 +1,7 @@
 ---
 title: "Cluster onboarding" 
 chapter: false
-weight: 32 
+weight: 52 
 ---
 
 After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Control Hub (NCH) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish.
