@@ -4,11 +4,11 @@ chapter: false
 weight: 32 
 ---
 
-After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Policy Manager (NPM) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish.
+After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Control Hub (NCH) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish.
 
 Click the **Get Started** button.
 
-The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NPM and then working with the systems within the framework, by monitoring the cluster details and policy violations.
+The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NCH and then working with the systems within the framework, by monitoring the cluster details and policy violations.
 
 ![Register an Existing Kubernetes Cluster](/images/register.jpg)
 
@@ -57,7 +57,7 @@ Select the set of policies to be configured on the cluster as default policy set
 
 ![image](/images/add_cluster_2.png)
 
-Use the `nctl login` command to login to NPM. If the token is not auto generated, visit the profile page and click on **Generate API Key** button to generate the token.
+Use the `nctl login` command to login to NCH. If the token is not auto generated, visit the profile page and click on **Generate API Key** button to generate the token.
 
 ![image](/images/add_cluster_3.png)
 
@@ -66,7 +66,7 @@ Once the command has run successfully, it will display a message notifying that:
 Validating user credentials...done!
 Wrote configuration to /home/username/.nirmata/config
 ```
-Next, copy the `nctl add cluster` command displayed in the final step from the web UI. Run this command to add your cluster to NPM.
+Next, copy the `nctl add cluster` command displayed in the final step from the web UI. Run this command to add your cluster to NCH.
 
 After running the above command, a confirmation message will be displayed, notifying that Nirmata Operator has been deployed successfully  on the cluster. Following this, the policy sets selected in the previous step will become ready.
 

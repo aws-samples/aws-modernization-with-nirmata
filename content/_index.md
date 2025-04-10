@@ -9,7 +9,7 @@ weight: 1
 
 ## Welcome
 
-Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of [Kyverno](https://kyverno.io/), [Nirmata Policy Manager (NPM)](https://nirmata.com/nirmata-cloud-native-policy-manager/) simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
+Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of [Kyverno](https://kyverno.io/), [Nirmata Control Hub (NCH)](https://nirmata.com/nirmata-control-hub/) simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
 
 ![image](/images/1_npm_home.png)
 

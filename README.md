@@ -1,10 +1,10 @@
 # Nirmata Modernization Workshop
 
-This workshop explains how to use Kyverno and [Nirmata](https://nirmata.com/) Policy Manager to secure your infrastructure.
+This workshop explains how to use Kyverno and [Nirmata](https://nirmata.com/) Control Hub to secure your infrastructure.
 
 ## Description
 
-Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of Kyverno, Nirmata Policy Manager simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
+Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of Kyverno, Nirmata Control Hub simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
 
  ## Types of Events
 
