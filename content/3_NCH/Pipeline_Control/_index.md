@@ -1,12 +1,12 @@
 ---
-title: "Shift-Down with nctl" # MODIFY THIS TITLE IF APPLICABLE
+title: "Pipeline Control Point"
 chapter: true
-weight: 40
+weight: 20
 ---
 
 ## Pipeline Scanning Workflow
 
-[nctl scan](https://docs.nirmata.io/nctl/commands/scan/repository) can be used within the local CLI environment; however, its true potential is unlocked when utilized within CI pipelines to scan code repositories.
+[nctl scan](https://docs.nirmata.io/docs/nctl/commands/nctl_scan_repository/) can be used within the local CLI environment; however, its true potential is unlocked when utilized within CI pipelines to scan code repositories.
 
 ![Scan Action Workflow](/images/scan_action_workflow.png)
 

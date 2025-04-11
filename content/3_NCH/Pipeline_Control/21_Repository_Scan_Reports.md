@@ -6,10 +6,10 @@ weight: 41
 
 Repository scan reports provide deep insights on the performance of different repositories containing configuration files.
 
-### Publishing Repository Scan Results to NPM
+### Publishing Repository Scan Results to NCH
 
 #### Admin User
-Login to the NPM tenant with the user's API Key.
+Login to the NCH tenant with the user's API Key.
 ```
 nctl login --url https://nirmata.io --userid admin@acme.corp --token <admin-api-key>
 ```
@@ -25,7 +25,7 @@ nctl scan repository ./nctl-shift-left --policy-sets pss-baseline
 ```
 
 #### DevOps User
-Login to the NPM tenant with the user's API Key.
+Login to the NCH tenant with the user's API Key.
 ```
 nctl login --url https://nirmata.io --userid user@acme.corp --token <user-api-key>
 ```
@@ -35,7 +35,7 @@ Clone the repository locally.
 git clone https://github.com/nirmata/nctl-shift-left
 ```
 
->NOTE: A DevOps user can publish scan reports to NPM **only** if they belong to a team that has permission to publish scan results. Please contact Admin user for granting permission.
+>NOTE: A DevOps user can publish scan reports to NCH **only** if they belong to a team that has permission to publish scan results. Please contact Admin user for granting permission.
 
 Run the repo scan command
 ```
@@ -44,9 +44,9 @@ nctl scan repository ./nctl-shift-left --policy-sets pss-baseline --publish-toke
 
 >NOTE: All users belonging to the team will be able to view the repository scan results.
 
-The scan reports are generated after the results from [Github scan action](https://docs.nirmata.io/npmk/workflows/github-action/) gets pushed to NPM.
+The scan reports are generated after the results from [Github scan action](https://docs.nirmata.io/npmk/workflows/github-action/) gets pushed to NCH.
 
-### Viewing Repository Scan Reports in NPM
+### Viewing Repository Scan Reports in NCH
 
 To view the scan reports:
 

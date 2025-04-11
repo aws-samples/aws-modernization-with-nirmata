@@ -17,8 +17,8 @@ A policy remediation works in the following way:
 policies.nirmata.io/remediation: "https://github.com/nirmata/kyverno-policies/tree/main/pod-security/baseline/disallow-host-namespaces/remediate-disallow-host-namespaces.yaml"
 ````
 
-3. NPM can then provide remediation suggestions based on the mutate policy.
->Note: It is important to annotate a ClusterPolicy with its corresponding mutate policy for the NPM remediation feature to work as expected.
+3. NCH can then provide remediation suggestions based on the mutate policy.
+>Note: It is important to annotate a ClusterPolicy with its corresponding mutate policy for the NCH remediation feature to work as expected.
 
 ![image](/images/remediation_diffs2.png)
 

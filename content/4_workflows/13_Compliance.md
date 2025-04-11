@@ -71,10 +71,6 @@ NOTE: Installing kube-bench adapter prompts the user to check policy reports and
 
     ![image](/images/add_standard.png)
     
-
-
-
-
 ## Namespace Compliance
 
 Compliance Report per Namespace is the compliance report for resources that is generated for a particular namespace within a cluster. A compliance standard contains various controls or rules and policies need to comply with the standard.
