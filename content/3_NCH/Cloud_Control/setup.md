@@ -4,8 +4,20 @@ chapter: true
 weight: 30
 ---
 
-## Enable Pod Identity Add-on
+## Setup Cloud Controller
+### Enable Pod Identity Add-on
 Enable the EKS Pod Identity Addon to allow seamless access to AWS resources without using explicit AWS credentials. You can enable this addon through either the AWS Management Console or the AWS CLI.
+
+* Via AWS Management Console
+  * Select your cluster
+  * Go to the _Add-ons_ tab
+  * Choose _Add Add-on_, search for **Pod Identity** and select it
+  * Follow the prompts to complete the setup
+
+* Via AWS CLI
+Run the following command to enable the Pod Identity Addon:
+`aws eks create-addon --cluster-name eks-workshop --addon-name eks-pod-identity-agent --addon-version v1.0.0-eksbuild.1
+`
 
 ### Create an IAM Role for Scanner Pods
 
@@ -39,6 +51,31 @@ Enable the EKS Pod Identity Addon to allow seamless access to AWS resources with
 		{
 			"Effect": "Allow",
 			"Action": [
+				"ecs:Describe*",
+				"ecs:List*",
+				"ecs:Get*"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"lambda:List*",
+				"lambda:Get*"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"eks:Describe*",
+				"eks:List*"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
 				"cloudformation:ListResources",
 				"cloudformation:GetResource"
 			],
@@ -50,19 +87,21 @@ Enable the EKS Pod Identity Addon to allow seamless access to AWS resources with
 
 Depending on which services you want to scan, provide the necessary read access (List* & Get*). For example, to scan all Lambda services, provide the following read permissions to the cloud controller. You can add similar permissions for S3, SQS, EKS, etc.
 
+>Note: In this workshop, we will scan ECS clusters, ECS TaskDefinition, Lambda functions, and EKS Clusters.
+
 ### Create Pod Identity Association
 
 Associate the IAM role created earlier with the existing service account `cloud-controller-scanner` in the `nirmata` namespace. Use the AWS CLI:
 
 ```bash
 aws eks create-pod-identity-association \
-  --cluster-name <EKS_CLUSTER_NAME> \
+  --cluster-name eks-workshop \
   --role-arn <IAM_ROLE_ARN> \
   --namespace nirmata \
   --service-account cloud-controller-scanner
 ```
 
-Replace `<EKS_CLUSTER_NAME>` with your cluster name and `<IAM_ROLE_ARN>` with the ARN of the IAM role created earlier.
+Replace `<IAM_ROLE_ARN>` with the ARN of the IAM role created earlier.
 
 > **Important:** The pod-identity association must be done before installing the Helm chart. If the Helm chart is already installed, restart the pods to ensure Pod Identity works correctly.
 
@@ -116,45 +155,9 @@ This section provides a step-by-step guide on how to use the admission controlle
 
 ### Setting up a Proxy
 
-To intercept AWS requests, you need to create a proxy server that listens on a specific port. The proxy server will apply the policies to the requests and forward them to the AWS cloud if they are compliant.
+To intercept AWS requests, we need a proxy server that listens on a specific port. The proxy server will apply the policies to the requests and forward them to the AWS cloud if they are compliant.
 
-In this example, we will create a proxy server that listens on port `8443`. It intercepts all requests destined for AWS. It then checks these requests against defined policies, specifically those labeled `app: kyverno`. Only compliant requests are forwarded to AWS.
-
-```yaml
-apiVersion: nirmata.io/v1alpha1
-kind: Proxy
-metadata:
-  name: proxy-sample
-spec:
-  port: 8443
-  caKeySecret:
-    name: cloud-controller-admission-controller-svc.nirmata.svc.tls-ca
-    namespace: nirmata
-  urls:
-    - ".*.amazonaws.com"
-  policySelectors:
-    - matchLabels:
-        app: kyverno
-```
-
-The admission controller automatically generates self-signed CA certificates. These certificates are stored as a Secret in the `nirmata` Namespace.
-
-To retrieve the Secret name, run the following command:
-
-```bash
-kubectl get secrets -n nirmata
-```
-
-The output should show the generated secret:
-
-```
-NAME                                                        TYPE                 DATA   AGE
-cloud-controller-admission-controller-svc.nirmata.svc.tls-ca   kubernetes.io/tls    2      4m28s
-```
-
-The `cloud-controller-admission-controller-svc.nirmata.svc.tls-ca` Secret contains the required CA certificate. As shown in the above Proxy configuration, the `spec.caKeySecret` field references this Secret.
-
-The proxy server is now running within your Kubernetes cluster, listening on port 8443. To use this proxy from your local machine, you need to establish a connection between your local port 8443 and the proxy server's port 8443 within the cluster. This is achieved using port forwarding.
+As part of the helm installation, this proxy server is automatically created for us and runs within the EKS Cluster, listening on port 8443. To use this proxy from your local machine, you need to establish a connection between your local port 8443 and the proxy server's port 8443 within the cluster. This is achieved using port forwarding.
 
 ```bash
 kubectl port-forward svc/cloud-controller-admission-controller-svc 8443:8443 -n nirmata
@@ -301,5 +304,6 @@ To test the scanner, we will create ECS resources, both compliant and non-compli
 
 ## Registering to Nirmata Control Hub
 Install the Nirmata kube-controller Helm chart to send policy reports to Control Hub.
+```bash
 helm install nirmata-kube-controller nirmata/nirmata-kube-controller -n nirmata --create-namespace  --set cluster.name=cloud-control --set namespace=nirmata --set apiToken=<api-token>
-
+```
