@@ -4,15 +4,6 @@ chapter: false
 weight: 52 
 ---
 
-After the user account is fully activated, it’s now time to begin to configure the Kubernetes clusters that Nirmata Control Hub (NCH) will be working with. On the opening screen, there is an introduction page explaining what NPM looks to accomplish.
-
-Click the **Get Started** button.
-
-The next page will list out the steps that will need to be completed. This includes installing the Nirmata Controller, connecting the cluster to NCH and then working with the systems within the framework, by monitoring the cluster details and policy violations.
-
-![Register an Existing Kubernetes Cluster](/images/register.jpg)
-
-## Cluster Onboarding
 To onboard a cluster with Nirmata,
  Click on the **Add Cluster** button on the *Clusters* panel. If you are trying out NPM for the first time, it is highly recommended to use the default onboarding process instead of the manual onboarding flow.
 

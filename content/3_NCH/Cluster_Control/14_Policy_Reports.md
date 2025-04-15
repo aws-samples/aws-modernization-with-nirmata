@@ -4,8 +4,6 @@ chapter: false
 weight: 54 
 ---
 
-## Cluster Policy Reports
-
 Policy Reports are automatically generated for clusters and namespaces. There is no additional configuration required for this functionality.
 
 **To access the Policy Reports:**
