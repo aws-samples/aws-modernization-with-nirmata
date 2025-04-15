@@ -105,12 +105,6 @@ touch nirmatarole.json
 }
 ```
 
-{{% notice note %}}
-Depending on which services you want to scan, provide the necessary read access (List* & Get*). For example, to scan all Lambda services, provide the following read permissions to the cloud controller. You can add similar permissions for S3, SQS, EKS, etc.
-
->Note: In this workshop, we will scan ECS clusters, ECS TaskDefinition, Lambda functions, and EKS Clusters.
-{{% /notice %}}
-
 - Create CFN stack via AWS CLI
 ```bash
 aws cloudformation create-stack --stack-name nirmatarole --template-body file://nirmatarole.json --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
@@ -120,6 +114,10 @@ aws cloudformation create-stack --stack-name nirmatarole --template-body file://
 ```bash
 aws iam get-role --role-name NirmataControlHubRole
 ```
+
+Depending on which services you want to scan, provide the necessary read access (List* & Get*). For example, to scan all Lambda services, provide the following read permissions to the cloud controller. You can add similar permissions for S3, SQS, EKS, etc.
+
+>Note: In this workshop, we will scan ECS clusters, ECS TaskDefinition, Lambda functions, and EKS Clusters.
 
 ### Create Pod Identity Association
 
