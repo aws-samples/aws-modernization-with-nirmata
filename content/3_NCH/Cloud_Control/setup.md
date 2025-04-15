@@ -16,78 +16,110 @@ Enable the EKS Pod Identity Addon to allow seamless access to AWS resources with
 
 * Via AWS CLI
 Run the following command to enable the Pod Identity Addon:
-`aws eks create-addon --cluster-name eks-workshop --addon-name eks-pod-identity-agent --addon-version v1.0.0-eksbuild.1
-`
+```bash
+aws eks create-addon --cluster-name eks-workshop --addon-name eks-pod-identity-agent --addon-version v1.0.0-eksbuild.1
+```
 
 ### Create an IAM Role for Scanner Pods
 
-- Create an IAM role in the same account as the EKS cluster. Attach the following trust policy to allow the EKS Pod Identity Agent to assume the role:
+- Make sure your assumed role is *WSParticipantRole/Participant*. If it's not, grab AWS CLI credentials from the event page (*Get AWS CLI Credentials* on the left panel and copy bash commands to your IDE terminal)
+```bash
+aws sts get-caller-identity
+```
 
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "AllowEksAuthToAssumeRoleForPodIdentity",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "pods.eks.amazonaws.com"
-        },
-        "Action": [
-          "sts:AssumeRole",
-          "sts:TagSession"
-        ]
-      }
-    ]
-  }
-  ```
+- Create JSON file for CloudFormation stack
+```bash
+touch nirmatarole.json
+```
 
-- Attach a policy to the IAM role with the permissions required for scanning AWS resources.
-
+- Open nirmatarole.json file in IDE or terminal and insert the IAM role definition which has trust policy to allow the EKS Pod Identity Agent to assume the role and necessary permissions required for scanning AWS resources with Nirmata Control Hub.
 ```json
-  {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ecs:Describe*",
-				"ecs:List*",
-				"ecs:Get*"
-			],
-			"Resource": "*"
-		},
-		{
-			"Effect": "Allow",
-			"Action": [
-				"lambda:List*",
-				"lambda:Get*"
-			],
-			"Resource": "*"
-		},
-		{
-			"Effect": "Allow",
-			"Action": [
-				"eks:Describe*",
-				"eks:List*"
-			],
-			"Resource": "*"
-		},
-		{
-			"Effect": "Allow",
-			"Action": [
-				"cloudformation:ListResources",
-				"cloudformation:GetResource"
-			],
-			"Resource": "*"
-		}
-	]
+{
+  "Resources": {
+      "NirmataControlHubRole": {
+          "Type": "AWS::IAM::Role",
+          "Properties": {
+              "RoleName": "NirmataControlHubRole",
+              "AssumeRolePolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                      {
+                          "Sid": "AllowEksAuthToAssumeRoleForPodIdentity",
+                          "Effect": "Allow",
+                          "Principal": {
+                              "Service": "pods.eks.amazonaws.com"
+                          },
+                          "Action": [
+                              "sts:AssumeRole",
+                              "sts:TagSession"
+                          ]
+                      }
+                  ]
+              },
+              "Policies": [
+                  {
+                      "PolicyName": "root",
+                      "PolicyDocument": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                              {
+                                  "Effect": "Allow",
+                                  "Action": [
+                                      "ecs:Describe*",
+                                      "ecs:List*",
+                                      "ecs:Get*"
+                                  ],
+                                  "Resource": "*"
+                              },
+                              {
+                                  "Effect": "Allow",
+                                  "Action": [
+                                      "lambda:List*",
+                                      "lambda:Get*"
+                                  ],
+                                  "Resource": "*"
+                              },
+                              {
+                                  "Effect": "Allow",
+                                  "Action": [
+                                      "eks:Describe*",
+                                      "eks:List*"
+                                  ],
+                                  "Resource": "*"
+                              },
+                              {
+                                  "Effect": "Allow",
+                                  "Action": [
+                                      "cloudformation:ListResources",
+                                      "cloudformation:GetResource"
+                                  ],
+                                  "Resource": "*"
+                              }
+                          ]
+                      }
+                  }
+              ]
+          }
+      }
+  }
 }
 ```
 
+{{% notice note %}}
 Depending on which services you want to scan, provide the necessary read access (List* & Get*). For example, to scan all Lambda services, provide the following read permissions to the cloud controller. You can add similar permissions for S3, SQS, EKS, etc.
 
 >Note: In this workshop, we will scan ECS clusters, ECS TaskDefinition, Lambda functions, and EKS Clusters.
+{{% /notice %}}
+
+- Create CFN stack via AWS CLI
+```bash
+aws cloudformation create-stack --stack-name nirmatarole --template-body file://nirmatarole.json --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+```
+
+- Retrieve NirmataControlHubRole ARN
+```bash
+aws iam get-role --role-name NirmataControlHubRole
+```
 
 ### Create Pod Identity Association
 
