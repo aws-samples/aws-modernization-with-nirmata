@@ -13,8 +13,7 @@ Enable the EKS Pod Identity Addon to allow seamless access to AWS resources with
   * Choose _Add Add-on_, search for **Pod Identity** and select it
   * Follow the prompts to complete the setup
 
-* Via AWS CLI
-Run the following command to enable the Pod Identity Addon:
+* Via AWS CLI. Run the following command to enable the Pod Identity Addon:
 ```bash
 aws eks create-addon --cluster-name eks-workshop --addon-name eks-pod-identity-agent --addon-version v1.0.0-eksbuild.1
 ```

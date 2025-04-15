@@ -25,11 +25,7 @@ The services provided in values.yaml should be accessible by the cloud controlle
 ```bash
 helm repo add nirmata https://nirmata.github.io/kyverno-charts
 helm repo update nirmata
-
-helm install cloud-controller nirmata/cloud-controller \
-  --create-namespace \ 
-  --namespace nirmata \ 
-  -f values.yaml
+helm install cloud-controller nirmata/cloud-controller --create-namespace --namespace nirmata -f values.yaml
 ```
 
 ### Verify Installation
@@ -41,4 +37,4 @@ kubectl get pods -n nirmata
 ```
 
 The output should display the running pods:
-(/images/nirmata-cloud-control-pods.png)
+![Nirmata Cloud Control Pods](/images/nirmata-cloud-control-pods.png)
