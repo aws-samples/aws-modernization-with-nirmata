@@ -11,7 +11,7 @@ Create a `values.yaml` file with the following information:
 scanner:
   primaryAWSAccountConfig:
     accountID: "your-account-id"
-    accountName: "cloud-control-demo"
+    accountName: "cloud-control-workshop"
     regions: ["us-west-2"] # insert any other regions
     services: ["EKS","ECS","Lambda"] # insert services to scan
 policies:

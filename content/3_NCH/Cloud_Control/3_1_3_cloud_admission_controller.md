@@ -30,7 +30,7 @@ This involves setting two environment variables:
     First, download the certificate:
     
     ```bash
-    kubectl get secrets -n nirmata cloud-control-admission-controller-svc.nirmata.svc.tls-ca -o jsonpath="{.data.tls\.crt}" | base64 --decode > ca.crt
+    kubectl get secrets -n nirmata cloud-controller-admission-controller-svc.nirmata.svc.tls-ca -o jsonpath="{.data.tls\.crt}" | base64 --decode > ca.crt
     ```
     
     Then, set the environment variable:
