@@ -18,7 +18,7 @@ policies.nirmata.io/remediation: "https://github.com/nirmata/kyverno-policies/tr
 ````
 
 3. NCH can then provide remediation suggestions based on the mutate policy.
->Note: It is important to annotate a ClusterPolicy with its corresponding mutate policy for the NCH remediation feature to work as expected.
+>Note: It is important to annotate a ClusterPolicy with its corresponding mutate policy for the Nirmata Control Hub (NCH) remediation feature to work as expected.
 
 ![image](/images/remediation_diffs2.png)
 

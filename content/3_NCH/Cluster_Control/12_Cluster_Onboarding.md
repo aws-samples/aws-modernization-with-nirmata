@@ -5,7 +5,7 @@ weight: 52
 ---
 
 To onboard a cluster with Nirmata,
- Click on the **Add Cluster** button on the *Clusters* panel. If you are trying out NPM for the first time, it is highly recommended to use the default onboarding process instead of the manual onboarding flow.
+ Click on the **Add Cluster** button on the *Clusters* panel. If you are trying out Nirmata Control Hub (NCH) for the first time, it is highly recommended to use the default onboarding process instead of the manual onboarding flow.
 
 This workflow requires [Nirmata Command Line Interface, nctl](https://downloads.nirmata.io/nctl/downloads/). Lets first install `nctl` on our Cloud9 instance:
 

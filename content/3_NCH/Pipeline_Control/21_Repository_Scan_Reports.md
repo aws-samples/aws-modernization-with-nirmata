@@ -6,7 +6,7 @@ weight: 41
 
 Repository scan reports provide deep insights on the performance of different repositories containing configuration files.
 
-### Publishing Repository Scan Results to NCH
+### Publishing Repository Scan Results to Nirmata Contro Hub (NCH)
 
 #### Admin User
 Login to the NCH tenant with the user's API Key.

@@ -12,7 +12,7 @@ User who wants to make any changes to the manifests in these repositories will c
 
 #### Understanding the GitHub Action Workflow
 
-A dedicated GitHub Action is available through the [GitHub marketplace](https://github.com/marketplace/actions/nctl-scan-installer). With this action, `nctl scan` can be used in the GitHub actions workflows to scan the configuration files present in the repository against the policies that are defined centrally. In case of a failure, the entire action can be configured to fail, meaning that the test pipeline will fail, and the users will get quick feedback for their changes. The results of the scan are available in NCH for viewing. NPM provides insights to platform administrators on overall governance of different code repositories in their organization.
+A dedicated GitHub Action is available through the [GitHub marketplace](https://github.com/marketplace/actions/nctl-scan-installer). With this action, `nctl scan` can be used in the GitHub actions workflows to scan the configuration files present in the repository against the policies that are defined centrally. In case of a failure, the entire action can be configured to fail, meaning that the test pipeline will fail, and the users will get quick feedback for their changes. The results of the scan are available in Nirmata Control Hub (NCH) for viewing. NCH provides insights to platform administrators on overall governance of different code repositories in their organization.
 
 To have a look at the workflow manifest file, refer to the `scan-outputs.yaml` file in the `.github/workflows` section of the **nctl-shift-left** [Github repository](https://github.com/nsagark/nctl-shift-left/).
 
@@ -37,7 +37,7 @@ Perform repository scan.
 
 ````
 
-`Nctl` works with the Jenkins CI pipeline and can be used in the Jenkins workflow to scan the configuration files present in a repository against the centrally defined policies. The Jenkins job will trigger the scanning of the files and if unsuccessful, the entire job will fail, which will prompt the user with feedback for their changes. Upon successful completion of the job, the scan results will be published to the NCH for viewing. NPM provides insights to platform administrators on overall governance of different code repositories in their organization.
+`Nctl` works with the Jenkins CI pipeline and can be used in the Jenkins workflow to scan the configuration files present in a repository against the centrally defined policies. The Jenkins job will trigger the scanning of the files and if unsuccessful, the entire job will fail, which will prompt the user with feedback for their changes. Upon successful completion of the job, the scan results will be published to the NCH for viewing. NCH provides insights to platform administrators on overall governance of different code repositories in their organization.
 
 #### Understanding the Jenkins Workflow
 
@@ -61,8 +61,8 @@ To see pipeline scanning with Jenkins CI in action:
     g. Select `Run Nctl Scan` from the dropdown.<br>
     g. Fill out the `NCTL Binary Link` field with the URL of the latest Nctl binary version to download. The required URL is available [here](https://downloads.nirmata.io/nctl/allreleases/).<br>
     h. Now, check the box for **Scan Only Repository** which will help integrate NCH.<br>
-    i. Under `API Key`, add the API key that can be found in the profile section of the NPM tenant.<br>
-    j. Fill out `Path to Policies files` with the path to your policy files and `Nirmata URL` with the NPM URL (https://www.nirmata.io)<br>
+    i. Under `API Key`, add the API key that can be found in the profile section of the NCH tenant.<br>
+    j. Fill out `Path to Policies files` with the path to your policy files and `Nirmata URL` with the NCH URL (https://www.nirmata.io)<br>
     k. Finally, click **Save** to complete the job configuration.
 
 ![image](/images/job-configure.png)
@@ -80,7 +80,7 @@ To see pipeline scanning with Jenkins CI in action:
 
 ### View Scan Reports in NCH
 
-By default, the results of the scan action are published to NPM. This allows administrators to govern their repositories alongside clusters and namespaces.
+By default, the results of the scan action are published to NCH. This allows administrators to govern their repositories alongside clusters and namespaces.
 
 To have a look at the scan report in NCH:
 
