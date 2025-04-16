@@ -21,16 +21,11 @@ This allows you to interact with the proxy and, consequently, enforce your polic
 
 ### Using the AWS CLI
 
-You need to configure your AWS CLI to route requests through the proxy server.
+You need to configure your AWS CLI to route requests through the proxy server. Perform the following steps in a new terminal.
+
 This involves setting two environment variables:
 
-1. **HTTPS_PROXY**: This tells the AWS CLI to send all requests through the controller acting as a local proxy.
-
-    ```bash
-    export HTTPS_PROXY=http://localhost:8443
-    ```
-
-2. **AWS_CA_BUNDLE**: The controller uses a self-signed security certificate. This variable tells the AWS CLI to trust that certificate. 
+1. **AWS_CA_BUNDLE**: The controller uses a self-signed security certificate. This variable tells the AWS CLI to trust that certificate. 
    
     First, download the certificate:
     
@@ -47,7 +42,13 @@ This involves setting two environment variables:
     It tells the AWS CLI which Certificate Authority (CA) to trust for verifying the proxy's SSL certificate. 
     Because the cloud admission controller is using a self-signed certificate (not issued by a publicly trusted CA), 
     the AWS CLI won't trust it by default. By setting **AWS_CA_BUNDLE** to the path of the controller's CA certificate (ca.crt), 
-    you're explicitly telling the AWS CLI that this certificate is valid and should be used to establish a secure connection with the proxy. 
+    you're explicitly telling the AWS CLI that this certificate is valid and should be used to establish a secure connection with the proxy.
     Without this, the AWS CLI would reject the connection due to the untrusted certificate.
+
+1. **HTTPS_PROXY**: This tells the AWS CLI to send all requests through the controller acting as a local proxy.
+
+    ```bash
+    export HTTPS_PROXY=http://localhost:8443
+    ```
 
 Once configured, your AWS CLI commands will be checked against the defined policies before being sent to AWS.

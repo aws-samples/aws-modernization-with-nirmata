@@ -12,14 +12,16 @@ scanner:
   primaryAWSAccountConfig:
     accountID: "your-account-id"
     accountName: "cloud-control-demo"
-    regions: ["us-west-1","us-east-1"] # insert any other regions
+    regions: ["us-west-2"] # insert any other regions
     services: ["EKS","ECS","Lambda"] # insert services to scan
+policies:
+  enabled: true
 ```
 
 Refer to the complete list of fields for Helm values [here](https://github.com/nirmata/kyverno-charts/tree/main/charts/cloud-controller#values).
 
 {{% notice note %}}
-The services provided in values.yaml should be accessible by the cloud controller. Make sure to attach appropriate IAM policy when creating the IAM Role above.
+The services provided in values.yaml should be accessible by the cloud controller. Make sure to attach appropriate IAM policy when creating the IAM Role in the previous step.
 {{% /notice %}}
 
 ```bash
@@ -38,3 +40,13 @@ kubectl get pods -n nirmata
 
 The output should display the running pods:
 ![Nirmata Cloud Control Pods](/images/nirmata-cloud-control-pods.png)
+
+### View Policies and Account Information
+
+```bash
+kubectl get validatingpolicies.nirmata.io -A
+```
+
+```bash
+kubectl get awsaccountconfigs.nirmata.io -A
+```
