@@ -4,100 +4,62 @@ chapter: false
 weight: 34
 ---
 
-The following examples demonstrate how the admission controller enforces a policy requiring all ECS clusters to have a ***group*** tag.
+The following examples demonstrate how the admission controller enforces a policy requiring all ECS task definitions to run in a non-privileged mode.
 
-1. Create an ECS cluster without the ***group*** tag:
+1. Create an ECS task definition in privieleged mode. In the container-definitions, privileged field is set to true.:
 
     ```bash
-    aws ecs create-cluster --cluster-name bad-cluster
+    aws ecs register-task-definition \
+        --family privileged-task \
+        --requires-compatibilities EC2 \
+        --network-mode bridge \
+        --cpu "256" \
+        --memory "512" \
+        --container-definitions '[
+            {
+            "name": "privileged-container",
+            "image": "amazonlinux",
+            "essential": true,
+            "memory": 512,
+            "cpu": 256,
+            "privileged": true,
+            "entryPoint": ["sh", "-c"],
+            "command": ["sleep 3600"]
+            }
+        ]'
     ```
 
     The output should be similar to the following:
 
     ```
-    An error occurred (406) when calling the CreateCluster operation: ecs-cluster.check-tags bad-cluster: -> A 'group' tag is required
-    -> all[0].check.data.(tags[?key=='group'] || `[]`).(length(@) > `0`): Invalid value: false: Expected value: true
+    An error occurred (406) when calling the RegisterTaskDefinition operation: validate-ecs-containers-nonprivileged.validate-ecs-containers-nonprivileged TEST: -> The `privileged` field, if present, should be set to `false`
     ```
 
-    As expected, the request was blocked since it violates the ValidatingPolicy that requires all ECS clusters to have the ***group*** tag.
+    As expected, the request was blocked since it violates the ValidatingPolicy that requires all ECS task definitions to run in non-privielged mode, i.e., if privileged field is present, it should be set to false.
 
-2. Create an ECS cluster with the ***group*** tag:
+2. Create an ECS task definition with privileged field set to false:
 
     ```bash
-    aws ecs create-cluster --cluster-name good-cluster --tags key=group,value=test key=owner,value=test
+    aws ecs register-task-definition \
+        --family privileged-task \
+        --requires-compatibilities EC2 \
+        --network-mode bridge \
+        --cpu "256" \
+        --memory "512" \
+        --container-definitions '[
+            {
+            "name": "privileged-container",
+            "image": "amazonlinux",
+            "essential": true,
+            "memory": 512,
+            "cpu": 256,
+            "privileged": false,
+            "entryPoint": ["sh", "-c"],
+            "command": ["sleep 3600"]
+            }
+        ]'
     ```
 
-    The output should be similar to the following:
+    The task definition should be successfully created.
 
-    ```
-    {
-        "cluster": {
-            "clusterArn": "arn:aws:ecs:us-east-1:844333597536:cluster/good-cluster",
-            "clusterName": "good-cluster",
-            "status": "ACTIVE",
-            "registeredContainerInstancesCount": 0,
-            "runningTasksCount": 0,
-            "pendingTasksCount": 0,
-            "activeServicesCount": 0,
-            "statistics": [],
-            "tags": [
-                {
-                    "key": "owner",
-                    "value": "test"
-                },
-                {
-                    "key": "group",
-                    "value": "test"
-                }
-            ],
-            "settings": [
-                {
-                    "name": "containerInsights",
-                    "value": "disabled"
-                }
-            ],
-            "capacityProviders": [],
-            "defaultCapacityProviderStrategy": []
-        }
-    }
-    ```
-
-    The request was successful since it complies with the ValidatingPolicy that requires all ECS clusters to have the ***group*** tag.
-
-### ECS Clusters and Task Definitions
-
-To test the scanner, we will create ECS resources, both compliant and non-compliant with the ValidatingPolicies that check the ***group*** tag, by creating ECS clusters and task definitions, some with and some without the required ***group*** tag.
-
-1. Create an ECS cluster named ***bad-cluster*** without the ***group*** tag:
-```bash
-aws ecs create-cluster --cluster-name bad-cluster
-```
-
-2. Register a task definition named ***bad-task*** without the ***group*** tag:
-```bash
-aws ecs register-task-definition \
-    --family bad-task \
-    --container-definitions '[{"name": "my-app", "image": "nginx:latest", "essential": true, "portMappings": [{"containerPort": 80, "hostPort": 80}]}]' \
-    --requires-compatibilities FARGATE \
-    --cpu 256 \
-    --memory 512 \
-    --network-mode awsvpc
-```
-
-3. Create an ECS cluster named ***good-cluster*** with the ***group*** tag:
-```bash
-aws ecs create-cluster --cluster-name good-cluster --tags key=group,value=development
-```
-
-4. Register a task definition named ***good-task*** with the ***group*** tag:
-```bash
-aws ecs register-task-definition \
-    --family good-task \
-    --container-definitions '[{"name": "my-app", "image": "nginx:latest", "essential": true, "portMappings": [{"containerPort": 80, "hostPort": 80}]}]' \
-    --requires-compatibilities FARGATE \
-    --cpu 256 \
-    --memory 512 \
-    --network-mode awsvpc \
-    --tags '[{"key": "group", "value": "production"}]'
-```
-
+    The request was successful since it complies with the ValidatingPolicy.
