@@ -1,4 +1,3 @@
-public/
 *.swp
 *.*~
 project.lock.json
@@ -35,3 +34,4 @@ msbuild.wrn
 
 # Node Modules
 node_modules/
+public/
