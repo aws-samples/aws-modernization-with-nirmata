@@ -58,25 +58,57 @@ chmod +x install_gh.sh
 ./install_gh.sh
 ```
 
-### Forking and Cloning the Repository
+### GitHub Authentication
 
-Now that you have GitHub CLI installed, let's fork and clone the example repository in one step:
+Let's now authenticate with GitHub CLI:
 
-1. **Authenticate with GitHub CLI**:
+1. Check if you're already authenticated with GitHub:
+
    ```bash
-   gh auth login
+   gh auth status || gh auth login
    ```
-   Follow the prompts to complete the authentication process.
 
-2. **Fork and Clone the Repository**:
+2. If you need to authenticate, follow these steps:
+   - Select **GitHub.com**
+   - Select **HTTPS** as your preferred protocol
+   - When asked "Authenticate Git with your GitHub credentials?": Enter **Y**
+   - Select **Login with a web browser**
+   - Copy the one-time code shown in your terminal
+   - Press Enter to open the browser
+   - Paste the code in GitHub and authorize access
+   - Return to your terminal and wait for authentication to complete (This can take up to 30 seconds or more)
+
+![GitHub CLI Authentication](/images/gh-auth.png)
+
+::alert[If you don't have the GitHub CLI installed, you can install it with the [installation instructions](https://github.com/cli/cli#installation) for your operating system.]{header="Note"}
+
+## Fork the Workshop Repository
+
+For this workshop, we'll fork the Akuity EKS workshop template repository. **Choose ONE of the following methods**:
+
+### Option 1: Using GitHub CLI (Recommended)
+
+Fork and clone the repository using the GitHub CLI:
+
+```bash
+# Fork the repository and clone it
+gh repo fork nsagark/nctl-shift-left --clone=true --remote=true
+cd nctl-shift-left
+```
+
+### Option 2: Using GitHub Web Interface
+
+If you prefer to use the GitHub web interface instead:
+
+1. Visit [https://github.com/nirmata/demo-nctl-shift-left](https://github.com/nirmata/demo-nctl-shift-left)
+2. Click the "Fork" button in the top-right corner
+3. Ensure your personal account is selected as the owner
+4. Keep the repository name as `nctl-shift-left`
+5. Click "Create fork"
+6. Clone the repository to your local machine:
    ```bash
-   gh repo fork nsagark/nctl-shift-left --clone=true
+   git clone https://github.com/YOUR-USERNAME/nctl-shift-left
    cd nctl-shift-left
-   ```
-
-3. **Verify the Repository Structure**:
-   ```bash
-   ls -la
    ```
    
    You should see the repository contents, including:
