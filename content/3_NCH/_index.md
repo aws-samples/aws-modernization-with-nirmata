@@ -1,22 +1,34 @@
 ---
 title: "Getting started with Nirmata"
 chapter: true
-weight: 30
+weight: 10
 ---
-## Nirmata Control Hub: Empowering Enterprises to Secure and Scale Kubernetes
+## Nirmata Control Hub: Your Unified Kubernetes Governance Platform
 
-Nirmata Is the Creator of [Kyverno](https://kyverno.io/) - the Kubernetes-Native Policy Engine.         
+Nirmata Control Hub (NCH) provides a comprehensive solution for securing and governing Kubernetes environments at scale. As the creator of [Kyverno](https://kyverno.io/), Nirmata brings enterprise-grade policy management to Kubernetes.
 
-Nirmata allows enterprises to securely scale Kubernetes by enabling multi-cluster policy-based security and governance. 
+### The Governance Challenge
+Organizations adopting Kubernetes face significant challenges in maintaining security, compliance, and operational best practices across multiple clusters and teams. Without proper governance:
+- Security vulnerabilities can proliferate through misconfigured workloads
+- Compliance requirements become difficult to enforce consistently
+- Operational standards vary across teams and environments
+- Visibility into policy violations remains fragmented
 
-[Nirmata Control Hub](https://docs.nirmata.io/docs/npmk/) (NCH) for Kubernetes provides enterprise grade reporting and policy lifecycle management across Kubernetes clusters. It is built on Kyverno, a CNCF project created by Nirmata.
+### The Nirmata Solution
+NCH addresses these challenges through a unified approach to policy management across three critical control points:
 
 ![npm dashboard](/images/npm-dashboard-new.png)
 
-Nirmata Control Hub Benefits
+1. **Cloud Control Point**: Prevents misconfigurations in cloud resources before deployment
+2. **Cluster Control Point**: Enforces policies across Kubernetes clusters in runtime
+3. **Pipeline Control Point**: Shifts security left by validating configurations in CI/CD pipelines
 
-1. Operational Compliance - Curated policysets for pod security, workload security, multitenancy and microsegmentation, supply chain security best practices, and much more. The Kubernetes ecosystem is fast moving, and NCH provides peace of mind to DevSecOps teams for operational security and best practices.
-2. Automated Kyverno and Policy Management across clusters and namespaces.
-3. Policy Reports - Policy Violations Reports at pipelines, clusters, and cloud level.
-4. Sharing Reports - Ability to share the compliance reports with your team.
-5. Collaborative Workflows - Seamlessly integrate with policy exceptions and provide remediation suggestions.
+In this workshop, you'll implement each of these control points and learn how they work together to create a comprehensive governance framework for your Kubernetes environments.
+
+### Key Benefits
+- **Operational Compliance**: Apply curated policy sets for security, multitenancy, and best practices
+- **Automated Policy Management**: Centrally manage policies across clusters and namespaces
+- **Comprehensive Reporting**: Gain visibility into policy violations across your environment
+- **Collaborative Workflows**: Streamline exception handling and remediation processes
+
+Let's begin by exploring the Cloud Control Point, which helps prevent misconfigurations in your cloud resources.
