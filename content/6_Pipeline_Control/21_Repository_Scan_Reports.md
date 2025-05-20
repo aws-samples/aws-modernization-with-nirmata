@@ -16,12 +16,14 @@ nctl login --url https://nirmata.io --userid admin@acme.corp --token <admin-api-
 
 Clone the repository locally.
 ```
-git clone https://github.com/nirmata/nctl-shift-left
+git clone https://github.com/nirmata/demo-resources
 ```
 
 Run the repo scan command
 ```
-nctl scan repository ./nctl-shift-left --policy-sets pss-baseline
+cd demo-resources/
+nctl scan repository --publish
+
 ```
 
 #### DevOps User
@@ -32,14 +34,15 @@ nctl login --url https://nirmata.io --userid user@acme.corp --token <user-api-ke
 
 Clone the repository locally.
 ```
-git clone https://github.com/nirmata/nctl-shift-left
+git clone https://github.com/nirmata/demo-resources
 ```
 
 >NOTE: A DevOps user can publish scan reports to NCH **only** if they belong to a team that has permission to publish scan results. Please contact Admin user for granting permission.
 
 Run the repo scan command
 ```
-nctl scan repository ./nctl-shift-left --policy-sets pss-baseline --publish-token <team-repo-publish-key>
+cd demo-resources/
+nctl scan repository --publish
 ```
 
 >NOTE: All users belonging to the team will be able to view the repository scan results.
