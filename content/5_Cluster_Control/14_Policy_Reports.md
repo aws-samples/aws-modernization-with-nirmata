@@ -4,7 +4,31 @@ chapter: false
 weight: 54 
 ---
 
-Policy Reports are automatically generated for clusters and namespaces. There is no additional configuration required for this functionality.
+Policy Reports are automatically generated for clusters and namespaces. For this we will first deploy policies using Policy set in Nirmata
+
+Navigate to Policy set in Nirmata and click on **Add Policy set**.  It is not mandatory to use Nirmata’s curated policy sets. Create a custom policy set by clicking on Add Custom Policy Set. This option provides more control over the lifecycle of the underlying policies.
+
+The page displays two options to create a policy set:
+
+a. Git (recommended) - Select this option to create a Policy Set from an existing Git repository.
+
+b. YAML - Select this option to create a Policy Set by uploading YAML files directly.
+
+Click on Git and add the settings like below: 
+
+**Repo**: https://github.com/nirmata/demo-ws-nirmata 
+
+**Branch**: main
+
+**Path**: /Docs-and-Guides/Nirmata-policies/restricted-psp-audit/
+
+Rest can be default, and click on **ok**
+
+You can now add a cluster to the policy set by clicking and selecting **Add cluster** in the top right corner
+
+Monitor the policies deployed, and we are all set to view the policy reports.
+
+**Note** The polices are configured for nginx and demo namespace and do not show the violation for all the resources.. Create both the namespace and deploy some [sample insecure workloads](https://github.com/nirmata/demo-ws-nirmata/tree/main/Docs-and-Guides/Nirmata-policies/insecure%20workloads) to test the violations 
 
 **To access the Policy Reports:**
 1. Go to **Policies**>**Policy Reports**. The Policy Reports can be viewed based on Categories, Clusters, or Namespaces.
@@ -15,30 +39,8 @@ Policy Reports are automatically generated for clusters and namespaces. There is
 
 ![image](/images/rbac_best_practices.png)
 
-3. To view detailed report of a particular finding, click on any **Findings** link to view the details and its impact. The details contains violation and policy information as the policy name, rule name, severity of the violation, and other metadata. The page also lists the impacted resources for this finding.
+3. To view detailed report of a particular finding, click on any **Findings** link to view the details and its impact. The details contain violation and policy information as the policy name, rule name, severity of the violation, and other metadata. The page also lists the impacted resources for this finding.
 
 ![image](/images/policy_findings.png)
 
-4. Click on the **Scheduled Reports** button to receive the periodic email on the policy violations. To do so:
-
-   a. Click on the **+** symbol. The Schedule Email page opens.
-
-   b. Select a cluster and click **Next**.
-   
-   c. Select the scope by clicking on the radio button either **Cluster** or **Namespaces**.
-
-   d. In the Sender field, enter the sender's email address.
-
-   e. In the Recipients field, enter the recipient's email address.
-
-   f. In the Subject field, enter the subject for the report.
-
-   g. In the Message field, enter the email message.
-
-   h. Click the checkbox **Schedule** and in the Schedule field, select the schedule option. The options available are: hourly, daily, weekly, and monthly.
-
-   i. Select the day and time for daily and weekly schedulings and month for monthly schedulings.
-
-   j. Click **Save**.
-
-   ![image](/images/scheduled_policy_report.png)
+You can also **Schedule report** or assign it to a user using the **Jira integration** 
