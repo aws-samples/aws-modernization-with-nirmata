@@ -1,7 +1,7 @@
 ---
 title: "Compliance" 
 chapter: false
-weight: 33 
+weight: 50
 ---
 
 ## Cluster Compliance
