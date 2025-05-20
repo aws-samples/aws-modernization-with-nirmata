@@ -18,7 +18,7 @@ To request a **policy exception**:
 2. Click on the violation that needs an exception. This will display a detailed report of that particular violation.
 3. On the same page, click on the `Request Policy Exception` button located on the top right-hand section of the screen. It will display a dialog box as shown below.
 
-![image](/images/request_policy_exception_2.png)
+![image](/images/exception.png)
 
 4. Fill the details along with a reason for requesting the exception, and click the `Create` button.
 5. A new **Policy Exception Request** is now created and it will send an alert to the admin for a review.
