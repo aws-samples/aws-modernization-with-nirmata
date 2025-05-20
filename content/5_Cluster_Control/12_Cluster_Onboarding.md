@@ -10,13 +10,13 @@ To onboard a cluster with Nirmata,
 This workflow requires [Nirmata Command Line Interface, nctl](https://downloads.nirmata.io/nctl/downloads/). Lets first install `nctl` on our Cloud9 instance:
 
 ```bash
-curl -LO https://dl.nirmata.io/nctl/nctl_4.2.3-rc.6/nctl_4.2.3-rc.6_linux_amd64.zip
+curl -LO https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_4.7.0/nctl_4.7.0_linux_386.zip
 ```
 
 To unzip and add proper permissions:
 
 ```bash
-unzip nctl_4.2.3-rc.6_linux_amd64.zip
+unzip nctl_4.7.0_linux_386.zip
 chmod +x nctl
 sudo mv nctl /usr/local/bin/nctl
 ```
@@ -31,12 +31,12 @@ Output should look similar to below as the version may have been updated since t
 
 ```bash
 nctl version
-Version: 4.2.3-rc.6
-Time: 2024-10-05T17:31:43Z
-Git commit ID: 696cc45ea3547b5bdfd1d46b58854572596bbbed
+Version: 4.7.0
+Time: 2025-05-16T14:12:29Z
+Git commit ID: 1035584dbfcb4ba2bd7fc7cfa33db8583e2919ed
 ```
 
-You can also refer to the [documentation](https://docs.nirmata.io/docs/nctl/installation/) for installation.
+You can also refer to the [documentation](https://downloads.nirmata.io/nctl/stablereleases/) for installation.
 
 Enter the cluster name (required) and labels (optional).
 
