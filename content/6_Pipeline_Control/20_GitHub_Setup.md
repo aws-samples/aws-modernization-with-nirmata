@@ -92,23 +92,23 @@ Fork and clone the repository using the GitHub CLI:
 
 ```bash
 # Fork the repository and clone it
-gh repo fork nsagark/nctl-shift-left --clone=true --remote=true
-cd nctl-shift-left
+gh repo fork https://github.com/nirmata/demo-resources --clone=true --remote=true
+cd demo-resources/
 ```
 
 ### Option 2: Using GitHub Web Interface
 
 If you prefer to use the GitHub web interface instead:
 
-1. Visit [https://github.com/nirmata/demo-nctl-shift-left](https://github.com/nirmata/demo-nctl-shift-left)
+1. Visit [sample repo](https://github.com/nirmata/demo-resources)
 2. Click the "Fork" button in the top-right corner
 3. Ensure your personal account is selected as the owner
-4. Keep the repository name as `nctl-shift-left`
+4. Keep the repository name as `demo-resources`
 5. Click "Create fork"
 6. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/nctl-shift-left
-   cd nctl-shift-left
+   git clone https://github.com/YOUR-USERNAME/demo-resources
+   cd demo-resources/
    ```
    
    You should see the repository contents, including:
@@ -120,7 +120,7 @@ This repository will serve as your testing ground for implementing pipeline scan
 
 ### Repository Structure Overview
 
-The `nctl-shift-left` repository contains several important components:
+The `sample` repository contains several important components:
 
 1. **Kubernetes Manifests**: Sample Kubernetes configuration files that we'll scan for policy violations
 2. **GitHub Actions Workflow**: Located in `.github/workflows/scan-outputs.yaml`, this workflow demonstrates how to integrate `nctl scan` into your CI/CD pipeline
