@@ -42,3 +42,4 @@ Log in to Nirmata, go to Settings → Profile, and copy the nctl login command t
 ```bash
 nctl login --url https://nirmata.io --userid dolis@nirmata.com --token 7nE***
 ```
+### Note: Keep the token handy for future workflows
