@@ -1,7 +1,7 @@
 ---
 title: "Install NCTL" 
 chapter: false
-weight: 52 
+weight: 90 
 ---
 
 
