@@ -8,13 +8,9 @@ Policy Reports are automatically generated for clusters and namespaces. For this
 
 Navigate to Policy set in Nirmata and click on **Add Policy set**.  It is not mandatory to use Nirmata’s curated policy sets. Create a custom policy set by clicking on Add Custom Policy Set. This option provides more control over the lifecycle of the underlying policies.
 
-The page displays two options to create a policy set:
+The page displays two options to create a policy set: Git(recommended) and YAML
 
-a. Git (recommended) - Select this option to create a Policy Set from an existing Git repository.
-
-b. YAML - Select this option to create a Policy Set by uploading YAML files directly.
-
-Click on Git and add the settings like below: 
+Click on Git and add the settings for the repo like below: 
 
 **Repo**: https://github.com/nirmata/demo-ws-nirmata 
 
@@ -24,9 +20,7 @@ Click on Git and add the settings like below:
 
 Rest can be default, and click on **ok**
 
-You can now add a cluster to the policy set by clicking and selecting **Add cluster** in the top right corner
-
-Monitor the policies deployed, and we are all set to view the policy reports.
+You can now add a cluster to the policy set by clicking and selecting **Add cluster** in the top right corner. Monitor the policies deployed, and we are all set to view the policy reports.
 
 **Note** The polices are configured for nginx and demo namespace and do not show the violation for all the resources.. Create both the namespace and deploy some [sample insecure workloads](https://github.com/nirmata/demo-ws-nirmata/tree/main/Docs-and-Guides/Nirmata-policies/insecure%20workloads) to test the violations 
 
