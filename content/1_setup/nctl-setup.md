@@ -40,10 +40,10 @@ Log in to Nirmata, go to Settings → Profile, and copy the nctl login command t
 
 ![nctl login command](/images/nctl-copy.png)
 
-Enter this command in the VS Code Server 
+Enter this command in the VS Code Server
 
 Output should look similar to below but with your Nirmata User ID and Token:
 ```
 nctl login --url https://nirmata.io --userid youremail@email.com --token 7nE***
 ```
-🚀 Congrats! You now have successfully installed NCTL and can move on to the next section! 
+🚀 Congrats! You now have successfully installed `nctl` and can move on to the next section! 
