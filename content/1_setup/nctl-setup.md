@@ -5,7 +5,7 @@ weight: 90
 ---
 
 
-This workflow requires [Nirmata Command Line Interface, nctl](https://downloads.nirmata.io/nctl/downloads/). Lets first install `nctl` on our Cloud9 instance:
+This workflow requires [Nirmata Command Line Interface, nctl](https://downloads.nirmata.io/nctl/downloads/). Lets first install `nctl` on our VS Code Server:
 
 ```bash
 curl -LO https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_4.7.0/nctl_4.7.0_linux_386.zip
@@ -27,7 +27,7 @@ nctl version
 
 Output should look similar to below as the version may have been updated since this publishing:
 
-```bash
+```
 nctl version
 Version: 4.7.0
 Time: 2025-05-16T14:12:29Z
@@ -38,7 +38,12 @@ You can also refer to the [documentation](https://downloads.nirmata.io/nctl/stab
 
 Log in to Nirmata, go to Settings → Profile, and copy the nctl login command to authenticate nctl with Nirmata.
 
+![nctl login command](/images/nctl-copy.png)
 
-```bash
-nctl login --url https://nirmata.io --userid dolis@nirmata.com --token 7nE***
+Enter this command in the VS Code Server 
+
+Output should look similar to below but with your Nirmata User ID and Token:
 ```
+nctl login --url https://nirmata.io --userid youremail@email.com --token 7nE***
+```
+🚀 Congrats! You now have successfully installed NCTL and can move on to the next section! 
