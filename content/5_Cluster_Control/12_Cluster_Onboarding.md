@@ -22,13 +22,21 @@ helm repo update nirmata
 
 ```
 
+
+
 ```bash
 helm install kyverno nirmata/kyverno -n kyverno --create-namespace --set features.policyExceptions.namespace="kyverno" --set features.policyExceptions.enabled=true --set admissionController.replicas=3 --version 3.3.9
 
 
 helm install kyverno-operator nirmata/nirmata-kyverno-operator -n nirmata-system --create-namespace --devel --set enablePolicyset=true --version v0.5.8 --set "policies.policySets=[]"
 
+```
 
+
+Replace the placeholders for **cluster name** and **token** in the command below
+
+
+```bash
 helm install nirmata-kube-controller nirmata/nirmata-kube-controller -n nirmata --create-namespace \
   --set nirmataURL=wss://nirmata.io/tunnels \
   --set cluster.name=<cluster-name> \
