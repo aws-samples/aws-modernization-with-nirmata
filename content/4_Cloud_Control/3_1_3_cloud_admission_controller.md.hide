@@ -4,7 +4,7 @@ chapter: false
 weight: 33
 ---
 
-This section provides a step-by-step guide on how to use the admission controller to intercept AWS requests and apply policies to them.
+This section provides a step-by-step guide on how to use the admission controller to intercept AWS requests and apply policies to them. 
 
 ### Setting up a Proxy
 
