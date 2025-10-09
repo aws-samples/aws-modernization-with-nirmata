@@ -20,7 +20,7 @@ policies.nirmata.io/remediation: "https://github.com/nirmata/kyverno-policies/tr
 3. NCH can then provide remediation suggestions based on the mutate policy.
 >Note: It is important to annotate a ClusterPolicy with its corresponding mutate policy for the Nirmata Control Hub (NCH) remediation feature to work as expected.
 
-![image](/images/remediation_diffs2.png)
+![image](/static/images/remediation_diffs2.png)
 
 ### Remediation in Policy Reports
 
@@ -30,22 +30,22 @@ To view Remediations in Policy Reports:
 
 2. Click on the **Remediations Available** button available beside the search bar to filter the list to only contain the rows that have remediations available.
 
-![image](/images/cluster_policy_reports.png)
+![image](/static/images/cluster_policy_reports.png)
 
 3. Click on any of the Cluster Name (example, **eks-production**) link to view the list of namespaces containing policy reports that have remediations available.
 
 4. Click on any of the remediation available namespaces to get the list of findings. Go to the Resources tab to find the list of impacted resources in the namespace and filter the ones with remediations available by checking the `Remediations Available` button. The page also shows the namespace grade along with the total number of resources and violations associated with the resources.
 
-![image](/images/namespace_resources.png)
+![image](/static/images/namespace_resources.png)
 
 5. Now, click on any of the impacted resources to view the findings related to that particular resource, their severity, status, and whether remediations are available for those findings. The page also summarizes the number of remediations available out of the violations, the namespace grade impact after the remediation is applied, and the number of affected child resources that can be fixed with the applied remediations.
 
-![image](/images/resource_findings.png)
+![image](/static/images/resource_findings.png)
 
 6. Click on the **View Remediation Diffs** button located at the top right-hand section of the screen to get a side-by-side view of the resource YAML and the remediated resource YAML. Both of the resources YAML can be downloaded by clicking on the download button.
 
-![image](/images/remediation_diffs.png)
+![image](/static/images/remediation_diffs.png)
 
 7. Click on any of the findings link with remediation available to view the detailed report, the remediation suggestions, and the list of impacted resources.
 
-![image](/images/finding_details.png)
+![image](/static/images/finding_details.png)

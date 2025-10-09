@@ -1,0 +1,546 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Cloudformation template for Nirmata and AWS Modernization Workshop
+Parameters:
+  KubernetesVersion:
+    Description: Kubernetes version
+    Type: String
+    Default: "1.32"
+
+  EKSClusterName:
+    Description: Name of EKS Cluster
+    Type: String
+    Default: "demo-aws-cluster"
+
+  WorkerNodeInstanceType:
+    Description: Worker Node cluster instances
+    Type: String
+    Default: "t3.large"
+
+  PodIdentityAddOnVersion:
+    Description: AWS Pod Identity Add-On Version
+    Type: String
+    Default: "v1.0.0-eksbuild.1"
+
+Resources:
+################## PERMISSIONS AND ROLES #################
+  WorkshopAdminRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: nirmata-and-aws-workshop-admin
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - codebuild.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Path: "/"
+
+  WorkshopLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName:
+          Fn::Join:
+          - ''
+          - - WorkshopLambdaPolicy-
+            - Ref: AWS::Region
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*"
+          - Effect: Allow
+            Action:
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*"
+          - Effect: Allow
+            Action:
+            - cloudformation:DescribeStacks
+            - cloudformation:DescribeStackEvents
+            - cloudformation:DescribeStackResource
+            - cloudformation:DescribeStackResources
+            Resource: !Sub "arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/*"
+          - Effect: Allow
+            Action:
+            - ec2:DescribeInstances
+            - ec2:DescribeInstanceTypeOfferings
+            - ec2:AssociateIamInstanceProfile
+            - ec2:ModifyInstanceAttribute
+            - ec2:ReplaceIamInstanceProfileAssociation
+            - ec2:DescribeIamInstanceProfileAssociations
+            - ec2:DescribeVolumes
+            - ec2:ModifyVolume
+            - ec2:DescribeVolumesModifications
+            - ec2:RebootInstances
+            Resource: "*"
+          - Effect: Allow
+            Action:
+            - iam:ListInstanceProfiles
+            Resource: !Sub "arn:aws:iam::${AWS::AccountId}:instance-profile/*"
+          - Effect: Allow
+            Action:
+            - iam:PassRole
+            Resource: !GetAtt WorkshopAdminRole.Arn
+          - Effect: Allow
+            Action:
+            - ssm:DescribeInstanceInformation
+            - ssm:SendCommand
+            - ssm:GetCommandInvocation
+            - ssm:ListCommandInvocations
+            Resource: "*"
+
+  NirmataControlHubRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: NirmataControlHubRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - pods.eks.amazonaws.com
+            Action:
+              - sts:AssumeRole
+              - sts:TagSession
+      Policies:
+      - PolicyName: root
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - ecs:Describe*
+            - ecs:List*
+            - ecs:Describe*
+            - lambda:List*
+            - lambda:Get*
+            - eks:Describe*
+            - eks:List*
+            - s3:Describe*
+            - s3:List*
+            - cloudtrail:Describe*
+            - cloudtrail:List*
+            - bedrock:List*
+            Resource: "*"
+          - Effect: Allow
+            Action:
+            - cloudformation:ListResources
+            - cloudformation:GetResource
+            Resource: "*"
+
+  KMSSecretsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "key for EKS secrets encryption"
+      Enabled: true
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: '2012-10-17'
+        Id: key-default-1
+        Statement:
+        - Sid: Enable IAM User Permissions
+          Effect: Allow
+          Principal:
+            AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
+          Action:
+            - kms:Create*
+            - kms:Describe*
+            - kms:Enable*
+            - kms:List*
+            - kms:Put*
+            - kms:Update*
+            - kms:Revoke*
+            - kms:Disable*
+            - kms:Get*
+            - kms:Delete*
+            - kms:ScheduleKeyDeletion
+            - kms:CancelKeyDeletion
+            - kms:GenerateDataKey
+            - kms:Encrypt
+            - kms:Decrypt
+          Resource: '*'
+
+################## INSTANCE PROFILE #####################
+
+  WorkshopInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    DependsOn: WorkshopAdminRole
+    Properties:
+      Path: "/"
+      InstanceProfileName: !Sub "nirmata-and-aws-workshop-admin-${AWS::StackName}"
+      Roles:
+        - !Ref WorkshopAdminRole
+
+################## EKS Bootstrap #####################
+
+  BuildProject:
+    DependsOn: [WorkshopInstanceProfile]
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Sub CodeBuild-${AWS::StackName}
+      ServiceRole: !GetAtt WorkshopAdminRole.Arn
+      Artifacts:
+        Type: NO_ARTIFACTS
+      LogsConfig:
+        CloudWatchLogs:
+          Status: ENABLED
+          GroupName: !Sub "/aws/codebuild/CodeBuild-${AWS::StackName}"
+          StreamName: build-log
+      EncryptionKey: !GetAtt KMSSecretsKey.Arn
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:5.0
+        EnvironmentVariables:
+          - Name: WAIT_HANDLE_URL
+            Value: !Ref EKSClusterWaitHandle
+          - Name: KMS_ARN
+            Value: !GetAtt KMSSecretsKey.Arn
+          - Name: EKSClusterName
+            Value: !Ref EKSClusterName
+          - Name: PodIdentityAddOnVersion
+            Value: !Ref PodIdentityAddOnVersion
+          - Name: AWSRegion
+            Value: !Sub "${AWS::Region}"
+          - Name: STACK_NAME
+            Value: !Ref AWS::StackName
+          - Name: KubernetesVersion
+            Value: !Ref KubernetesVersion
+          - Name: WorkerNodeInstanceType
+            Value: !Ref WorkerNodeInstanceType
+          
+      Source:
+        Type: NO_SOURCE
+        BuildSpec: |
+          version: 0.2
+          phases:
+            install:
+              runtime-versions:
+                python: 3.12
+              commands:
+                - echo ">>> installed python 3.12"
+                - export BUILD_SUCCESS=false
+            pre_build:
+              commands:
+                - echo ">>> build cluster config with Region $AWSRegion"
+                - |
+                  cat << EOF > cluster-config.yaml
+                  apiVersion: eksctl.io/v1alpha5
+                  kind: ClusterConfig
+                  metadata:
+                    name: ${EKSClusterName}
+                    region: ${AWSRegion}
+                    version: "${KubernetesVersion}"
+                  
+                  # Proper Auto Mode configuration as per AWS docs
+                  autoModeConfig:
+                    enabled: true
+                  
+                  availabilityZones:
+                    - ${AWSRegion}a
+                    - ${AWSRegion}b
+                    - ${AWSRegion}c
+                  
+                  cloudWatch:
+                    clusterLogging:
+                      enableTypes: ["*"]
+                  
+                  iam:
+                    withOIDC: true
+                  
+                  secretsEncryption:
+                    keyARN: ${KMS_ARN}
+                  EOF
+                - cat cluster-config.yaml
+
+                - pip3 install --upgrade --user awscli
+
+                - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+                - chmod +x ./kubectl
+
+                - curl --silent --fail --retry 5 --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+                - mv -v /tmp/eksctl /usr/local/bin
+                - eksctl version
+ 
+                - export PATH=$PWD/:$PATH
+            build:
+              commands:
+                - echo ">>> creating EKS cluster in region $AWSRegion with Auto Mode"
+                - |
+                  if eksctl create cluster -f cluster-config.yaml; then
+                    export BUILD_SUCCESS=true
+                    echo "EKS cluster creation successful"
+                  else
+                    echo "EKS cluster creation failed"
+                    if [ -n "$WAIT_HANDLE_URL" ]; then
+                      curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"EKS Cluster Creation Failed"}' "$WAIT_HANDLE_URL"
+                      echo "Sent FAILURE signal to CloudFormation"
+                    fi
+                    exit 1
+                  fi
+            post_build:
+              commands:
+                - echo ">>> Post-build phase"
+                - |
+                  if [ "$BUILD_SUCCESS" = "true" ]; then 
+                    echo "EKS cluster creation successful"
+                    
+                    # Configure kubectl
+                    aws eks update-kubeconfig --region ${AWSRegion} --name ${EKSClusterName}
+                    
+                    # Get the participant role ARN from the account
+                    ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+                    PARTICIPANT_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/WSParticipantRole"
+                    VSCODE_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/NirmataVSCodeInstanceBootstrapRole"
+                    
+                    # Create aws-auth ConfigMap to allow participant role access
+                    kubectl create configmap aws-auth -n kube-system --from-literal=mapRoles="[{\"rolearn\":\"${PARTICIPANT_ROLE_ARN}\",\"username\":\"workshop-user\",\"groups\":[\"system:masters\"]}, {\"rolearn\":\"${VSCODE_ROLE_ARN}\",\"username\":\"vscode-user\",\"groups\":[\"system:masters\"]}]" --dry-run=client -o yaml | kubectl apply -f -
+                    
+                    # Store EKS cluster info in SSM Parameter Store
+                    SSM_PREFIX="/eks/${EKSClusterName}"
+                    aws ssm put-parameter --name "$SSM_PREFIX/cluster-name" --value "${EKSClusterName}" --type "String" --overwrite
+                    aws ssm put-parameter --name "$SSM_PREFIX/region" --value "${AWSRegion}" --type "String" --overwrite
+
+                    # Enable Pod Identity Add-on 
+                    aws eks create-addon --cluster-name ${EKSClusterName} --addon-name eks-pod-identity-agent --addon-version ${PodIdentityAddOnVersion}
+                
+                    # Create Pod Identity Association
+                    NIRMATA_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/NirmataControlHubRole"
+                    echo "NIRMATA_ROLE_ARN: ${NIRMATA_ROLE_ARN}"
+                    aws eks create-pod-identity-association --cluster-name ${EKSClusterName} --role-arn ${NIRMATA_ROLE_ARN} --namespace nirmata --service-account cloud-controller-scanner
+                  fi
+                - echo ">>> build Nirmata helm chart values config with AWS Account ID ${ACCOUNT_ID} and AWS Region ${AWSRegion}"
+                - |
+                  cat << EOF > nirmata-values.yaml
+                  scanner:
+                    primaryAWSAccountConfig:
+                      accountID: "${ACCOUNT_ID}"
+                      accountName: "cloud-control-workshop"
+                      regions: ["${AWSRegion}"] 
+                      services: ["EKS","ECS","Lambda", "S3", "CloudTrail", "Bedrock"]
+                  policies:
+                    enabled: true
+                  EOF
+                - cat nirmata-values.yaml
+                - |
+                  # Helm chart deployment
+                  # curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get-helm-3.sh
+                  # chmod +x get-helm-3.sh && ./get-helm-3.sh
+
+                  # helm version --short
+
+                  # Deploy Cloud Control Helm Chart
+                  # helm repo add nirmata https://nirmata.github.io/kyverno-charts
+                  # helm repo update nirmata
+                  # helm install cloud-controller nirmata/cloud-controller --create-namespace --namespace nirmata -f nirmata-values.yaml
+
+                  # kubectl get pods -n nirmata
+                  # kubectl get validatingpolicies.nirmata.io -A
+                  # kubectl get awsaccountconfigs.nirmata.io -A
+                - |
+                  if [ "$BUILD_SUCCESS" = "false" ]; then
+                    echo "Build was not successful. Sending FAILURE signal."
+                    curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"Post-build verification of failure"}' "$WAIT_HANDLE_URL" || echo "Failed to send FAILURE signal"
+                    exit 1
+                  fi
+                  # Signal CloudFormation with success/failure status
+                - |
+                  echo "Signaling CloudFormation"
+                  echo "WAIT_HANDLE_URL: $WAIT_HANDLE_URL"
+                  
+                  if [ -n "$WAIT_HANDLE_URL" ]; then
+                    if [ "$BUILD_SUCCESS" = "true" ]; then
+                      # Try to send SUCCESS signal, with retry logic
+                      MAX_RETRIES=3
+                      RETRY_COUNT=0
+                      SIGNAL_SENT=false
+                      
+                      while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$SIGNAL_SENT" != "true" ]; do
+                        if curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"SUCCESS","Reason":"EKS Cluster Created","UniqueId":"EKSCluster","Data":"Deployment Complete"}' "$WAIT_HANDLE_URL"; then
+                          echo "Successfully sent SUCCESS signal to CloudFormation"
+                          SIGNAL_SENT=true
+                        else
+                          RETRY_COUNT=$((RETRY_COUNT+1))
+                          echo "Failed to send SUCCESS signal to CloudFormation (attempt $RETRY_COUNT/$MAX_RETRIES)"
+                          if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                            echo "Retrying in 5 seconds..."
+                            sleep 5
+                          fi
+                        fi
+                      done
+                      
+                      if [ "$SIGNAL_SENT" != "true" ]; then
+                        echo "All attempts to send SUCCESS signal failed. Sending FAILURE signal instead."
+                        curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"Failed to send SUCCESS signal","UniqueId":"EKSCluster","Data":"Signal Transmission Failed"}' "$WAIT_HANDLE_URL" || echo "Also failed to send FAILURE signal."
+                        exit 1
+                      fi
+                    else
+                      echo "Build was not successful. Sending FAILURE signal."
+                      curl -X PUT -H 'Content-Type:' --data-binary '{"Status":"FAILURE","Reason":"EKS Cluster Creation Failed","UniqueId":"EKSCluster","Data":"Post-build verification of failure"}' "$WAIT_HANDLE_URL" || echo "Failed to send FAILURE signal"
+                    fi
+                  else
+                    echo "ERROR: WAIT_HANDLE_URL is not set."
+                    exit 1
+                  fi
+
+  TriggerBuildLambdaIamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - codebuild.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+        - arn:aws:iam::aws:policy/AWSCodeBuildAdminAccess
+      Policies:
+        - PolicyName: !Sub IAMPolicy-${AWS::StackName}
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                    - codebuild:StartBuild
+                    - codebuild:BatchGetBuilds
+                    - codebuild:ListBuildsForProject
+                    - codebuild:BatchGetProjects
+                    - codebuild:StopBuild
+                Resource: !GetAtt BuildProject.Arn
+
+  TriggerBuildLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: function to trigger CodeBuild project
+      Handler: index.handler
+      Role: !GetAtt TriggerBuildLambdaIamRole.Arn
+      Runtime: python3.12
+      Timeout: 60
+      ReservedConcurrentExecutions: 5
+      Code:
+        ZipFile: |
+          import boto3
+          import logging
+          import json
+          import urllib.request
+          import time
+
+          logger = logging.getLogger()
+          logger.setLevel(logging.INFO)
+
+          codebuild_client = boto3.client('codebuild')
+
+          def handler(event, context):
+              logger.info('Incoming Event: {0}'.format(event))
+              response = {}
+              response['PhysicalResourceId'] = 'codebuildtrigger-' + str(int(time.time()))
+              response['StackId'] = event['StackId']
+              response['RequestId'] = event['RequestId']
+              response['LogicalResourceId'] = event['LogicalResourceId']
+
+              if event['RequestType'] == 'Delete':
+                  logger.info('Nothing to do. Request Type : {0}'.format(event['RequestType']))
+                  response['Status'] = 'SUCCESS'
+                  send_cfn_response(event, context, response['Status'], response)
+              elif event['RequestType'] == 'Create' or event['RequestType'] == 'Update':
+                  try:
+                      # Log the environment variables we're passing to make debugging easier
+                      wait_handle_url = event['ResourceProperties']['WaitHandleUrl']
+                      logger.info(f"WaitHandleUrl being passed to CodeBuild: {wait_handle_url}")
+                      
+                      build = codebuild_client.start_build(
+                          projectName=event['ResourceProperties']['CodebuildProjectName'],
+                          environmentVariablesOverride=[
+                              {
+                                  'name': 'WAIT_HANDLE_URL',
+                                  'value': wait_handle_url,
+                                  'type': 'PLAINTEXT'
+                              }
+                          ]
+                      )
+                      logger.info(f"CodeBuild started with build ID: {build['build']['id']}")
+                      response['Status'] = 'SUCCESS'
+                      send_cfn_response(event, context, response['Status'], response)
+                  except Exception as e:
+                      logger.error('Error: {0}'.format(str(e)))
+                      response['Status'] = 'FAILED'
+                      response['Reason'] = str(e)
+                      send_cfn_response(event, context, response['Status'], response)
+
+          def send_cfn_response(event, context, response_status, response_data):
+              response_body = json.dumps({
+                  'Status': response_status,
+                  'Reason': response_data.get('Reason', 'See the details in CloudWatch Log Stream: ' + context.log_stream_name),
+                  'PhysicalResourceId': response_data.get('PhysicalResourceId', context.log_stream_name),
+                  'StackId': event['StackId'],
+                  'RequestId': event['RequestId'],
+                  'LogicalResourceId': event['LogicalResourceId'],
+                  'Data': response_data
+              })
+
+              headers = {
+                  'content-type': '',
+                  'content-length': str(len(response_body))
+              }
+
+              logger.info(f"Sending response to: {event['ResponseURL']}")
+              
+              req = urllib.request.Request(url=event['ResponseURL'], data=response_body.encode('utf-8'), headers=headers, method='PUT')
+
+              try:
+                  with urllib.request.urlopen(req) as response:
+                      logger.info(f"Response sent. Status code: {response.getcode()}")
+                      logger.info(f"Status message: {response.msg}")
+              except Exception as e:
+                  logger.error(f"Failed to send response: {str(e)}")
+                
+  CustomTriggerBuild:
+    Type: Custom::TriggerBuild
+    DependsOn: BuildProject
+    Properties:
+      ServiceToken: !GetAtt TriggerBuildLambda.Arn
+      CodebuildProjectName: !Ref BuildProject
+      WaitHandleUrl: !Ref EKSClusterWaitHandle
+
+  EKSClusterWaitCondition:
+    Type: AWS::CloudFormation::WaitCondition
+    Properties:
+      Handle: !Ref EKSClusterWaitHandle
+      Timeout: '1800'  # 40 minutes
+      Count: 1
+
+  EKSClusterWaitHandle:
+    Type: AWS::CloudFormation::WaitConditionHandle
+
+Outputs:
+  EKSClusterName:
+    Description: EKS Cluster Name
+    Value: !Ref EKSClusterName
+  CloudFormationStack:
+    Description: Stack name for reference in scripts
+    Value: !Ref AWS::StackName

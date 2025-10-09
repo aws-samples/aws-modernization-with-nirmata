@@ -1,0 +1,67 @@
+version: 2.0
+
+defaultLocaleCode: en-US
+localeCodes:
+  - en-US
+
+
+# A dictionary of arbitrary parameters that can be referenced in the workshop guide
+# using the params directive.
+params:
+  author: Marina Novikova
+  description: Nirmata & AWS - Modernization Workshop
+
+# List of links to display in the workshop guide. Will be rendered on the left hand side navigation menu.
+additionalLinks:
+  - title: "Nirmata Marketplace Listing"
+    link: "https://aws.amazon.com/marketplace/pp/prodview-3u3gawz2yr7ui?sr=0-2&ref_=beagle&applicationId=AWSMPContessa"
+
+# START Infrastructure
+infrastructure:
+  cloudformationTemplates:
+    - templateLocation: static/infrastructure/vscode_server.yaml
+      label: VS Code
+      participantVisibleStackOutputs:
+        - URL
+        - Password   
+        
+    - templateLocation: static/infrastructure/eks-cluster.yaml
+      label: EKS Cluster for the workshop
+      participantVisibleStackOutputs:
+        - EKSClusterName   
+# END Infrastructure
+
+# START Accounts
+awsAccountConfig:
+  accountSources:
+    - workshop_studio
+  serviceLinkedRoles:
+    - appsync.amazonaws.com
+  participantRole:
+    iamPolicies: 
+      - static/iam_policy.json
+    managedPolicies:
+      - "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
+      - "arn:aws:iam::aws:policy/AdministratorAccess"
+    trustedPrincipals:
+      service:
+        - ec2.amazonaws.com
+        - elasticloadbalancing.amazonaws.com
+        - spot.amazonaws.com
+  regionConfiguration:
+    minAccessibleRegions: 1
+    maxAccessibleRegions: 3
+    accessibleRegions:
+      recommended:
+        - us-west-2
+        - us-east-1
+        - us-east-2
+    deployableRegions:
+      recommended:
+        - us-west-2
+        - us-east-1
+        - us-east-2
+
+        
+      
+# END Accounts

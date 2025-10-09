@@ -26,7 +26,7 @@ Run `aws sts get-caller-identity` and validate that your _Arn_ contains `nirmata
 ```json
 {
   "Account": "123456789012",
-  "UserId": "AROA1SAMPLEAWSIAMROLE:i-01234567890abcdef",
+  "UserId": "<insert here>",
   "Arn": "arn:aws:sts::123456789012:assumed-role/nirmata-workshop-admin/i-01234567890abcdef"
 }
 ```

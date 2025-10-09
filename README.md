@@ -1,62 +1,33 @@
-# Nirmata Modernization Workshop
+# Aws-workshop-template
 
-This workshop explains how to use Kyverno and [Nirmata](https://nirmata.com/) Control Hub to secure your infrastructure.
-
-## Description
-
-Misconfigurations are the leading cause of security issues in Kubernetes. Eliminate misconfigurations and automate operations with Kubernetes-native policies. Built by the creators of Kyverno, Nirmata Control Hub simplifies Kubernetes operations with automated policy-based governance to reduce risk, automate security, and optimize costs.
-
- ## Types of Events
-
- - Self-paced - follow you own pace to follow step by step instructions
- - Joining AWS hosted event with Nirmata
-
-### Learning Objectives
-
-* Policy-based Intelligent Guardrails: Rapidly deploy Intelligent Guardrails by implementing curated best practices, and community crowdsourced or custom-developed policies.
-* Policy-as-Code: Easily manage policies through their entire lifecycle, ensuring consistent deployment and governance.
-* Policy Reporting and Alerts: Gain insights on the effectiveness of policy through reporting and contextual correlation and insight engine.
-* Continuous Compliance: Protect the software supply chain with continuous compliance through policies as a standard part of the DevOps pipeline.
-* Collaboration: Leverage existing processes and workflows by integrating with tools like Git, Slack, Jira, and others
-
-## Building the Website
-
-This site is built with Hugo, so you'll need it [installed](https://gohugo.io/getting-started/quick-start/#step-1-install-hugo)
-
-First, clone this repo:
+## Repo structure
 
 ```bash
-git clone git@github.com:aws-samples/aws-modernization-with-nirmata.git
+.
+├── contentspec.yaml                  <-- Specifies the version of the content
+├── README.md                         <-- This instructions file
+├── static                            <-- Directory for static assets to be hosted alongside the workshop (ie. images, scripts, documents, etc) 
+└── content                           <-- Directory for workshop content markdown
+    └── index.en.md                   <-- At the root of each directory, there must be at least one markdown file
+    └── introduction                  <-- Directory for workshop content markdown
+        └── index.en.md               <-- Markdown file that would be render 
 ```
 
-Ensure you've also cloned the submodules:
+## What's Included
 
-```bash
-git submodule init
-git submodule update
+This project contains the following folders:
+* `static`: This folder contains static assets to be hosted alongside the workshop (ie. images, scripts, documents, etc) 
+* `content`: This is the core workshop folder. This is generated as HTML and hosted for presentation for customers.
+
+## How to create content
+
+Under the `content` folder, Each folder requires at least one `index.<lang>.md` file. The file will have a header
+
+```aidl
++++
+title = "AWS Workshop Template"
+weight = 0
++++
 ```
 
-Then serve the website with Hugo:
-
-```bash
-hugo server
-```
-
-## Authors
-
-Contributors names and contact info
-
-* Marina Novikova (@mariswa)
-* Boris Kurktchiev (@kurktchiev)
-* Ritesh TBD
-
-## License
-
-This project is licensed. See the LICENSE.md file for details
-
-## Acknowledgments
-
-* Markdown cheat sheet (https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-* Learn theme markdown (https://learn.netlify.app/en/cont/markdown/)
-* Menu extras and shortcuts (https://learn.netlify.app/en/cont/menushortcuts/)
-* Using Font Awesome Emoji's to help your page pop (https://learn.netlify.app/en/cont/icons/)
+The title will be the title on navigation panel on the left. The weight determines the order the page appears in the navigation panel.

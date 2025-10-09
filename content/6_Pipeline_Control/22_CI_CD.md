@@ -49,44 +49,43 @@ To see pipeline scanning with Jenkins CI in action:
 
 4. Enter the name of the job. Select `Freestyle project` from the list of options to choose from and click `OK`.
 
-![image](/images/jenkins-job-initiate.png)
+![image](/static/images/jenkins-job-initiate.png)
 
-5. Now that the job is created, it needs to be configured accordingly for the pipeline scanning to take place. To do so:<br>
-    a. Click on **General** and fill out `Jira site` with your organization's Atlassian URL.<br>
-    b. After that, select `Git` as the **Source Code Management** and provide the repository details.<br>
-    c. Enter the `URL` of your repository and provide the credentials if its a private one. Leave credentials as none if it is a public repository.<br>
-    d. Next, mention the branch name where the scanning will take place. Type `./main` if there is no other branches in the repository.<br>
-    e. Next, under **Additional Behaviours**, click `Add` and select `Check out to specific local branch` from the dropdown and type `main` under **Branch Name**.<br>
-    f. After this, scroll down to **Build Steps** and click on **Add build step**.<br>
-    g. Select `Run Nctl Scan` from the dropdown.<br>
-    g. Fill out the `NCTL Binary Link` field with the URL of the latest Nctl binary version to download. The required URL is available [here](https://downloads.nirmata.io/nctl/allreleases/).<br>
-    h. Now, check the box for **Scan Only Repository** which will help integrate NCH.<br>
-    i. Under `API Key`, add the API key that can be found in the profile section of the NCH tenant.<br>
-    j. Fill out `Path to Policies files` with the path to your policy files and `Nirmata URL` with the NCH URL (https://www.nirmata.io)<br>
+5. Now that the job is created, it needs to be configured accordingly for the pipeline scanning to take place. To do so:
+
+    a. Click on **General** and fill out `Jira site` with your organization's Atlassian URL.
+
+    b. After that, select `Git` as the **Source Code Management** and provide the repository details.
+
+    c. Enter the `URL` of your repository and provide the credentials if its a private one. Leave credentials as none if it is a public repository.
+
+    d. Next, mention the branch name where the scanning will take place. Type `./main` if there is no other branches in the repository.
+
+    e. Next, under **Additional Behaviours**, click `Add` and select `Check out to specific local branch` from the dropdown and type `main` under **Branch Name**.
+
+    f. After this, scroll down to **Build Steps** and click on **Add build step**.
+
+    g. Select `Run Nctl Scan` from the dropdown.
+
+    g. Fill out the `NCTL Binary Link` field with the URL of the latest Nctl binary version to download. The required URL is available [here](https://downloads.nirmata.io/nctl/allreleases/).
+
+    h. Now, check the box for **Scan Only Repository** which will help integrate NCH.
+
+    i. Under `API Key`, add the API key that can be found in the profile section of the NCH tenant.
+
+    j. Fill out `Path to Policies files` with the path to your policy files and `Nirmata URL` with the NCH URL (https://www.nirmata.io)
+
     k. Finally, click **Save** to complete the job configuration.
 
-![image](/images/job-configure.png)
+![image](/static/images/job-configure.png)
 
 6. Next, click on **Build Now** on the left hand side navigation bar to run the job. This will trigger the pipeline scan and the process can be seen under `Build History` located on the left hand lower corner of the screen.
 
-![image](/images/job-build.png)
+![image](/static/images/job-build.png)
 
 7. Now, click on the build number under **Build History** to see details on the completion of the job. The status page will open by default where the information on the success or the failure of the job will be visible.
 8. Click on **Console Output** on the navigation bar to have a look at the scan results.
 
-![image](/images/job-output.png)
+![image](/static/images/job-output.png)
 
 9. Scroll down to the end of the page to verify the publishing of the report to the NCH tenant.
-
-### View Scan Reports in NCH
-
-By default, the results of the scan action are published to NCH. This allows administrators to govern their repositories alongside clusters and namespaces.
-
-To have a look at the scan report in NCH:
-
-1. Log into the NCH and go to **Policies**>**Policy Reports**. The Policy Reports can be viewed based on Categories, Clusters, Namespaces, and Repositories.
-2. Navigate to the Repositories tab to find the scanned repository under the list of repositories.
-
-![image](/images/npm-repositories.png)
-
-3. Click on the repository hyperlink to get a detailed view of the scanned report.
