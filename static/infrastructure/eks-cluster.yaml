@@ -38,8 +38,119 @@ Resources:
             Action:
               - sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AdministratorAccess
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
       Path: "/"
+
+  WorkshopAdminEksPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: EksAllAccess
+      Roles:
+        - !Ref WorkshopAdminRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: "eks:*"
+            Resource: "*"
+          - Effect: Allow
+            Action:
+              - ssm:GetParameter
+              - ssm:GetParameters
+              - ssm:PutParameter
+            Resource:
+              - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/aws/*"
+              - !Sub "arn:aws:ssm:*::parameter/aws/*"
+              - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/eks/*"
+          - Effect: Allow
+            Action:
+              - kms:CreateGrant
+              - kms:DescribeKey
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:GenerateDataKey
+            Resource: !GetAtt KMSSecretsKey.Arn
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+              - logs:PutRetentionPolicy
+              - logs:DescribeLogGroups
+              - logs:DescribeLogStreams
+            Resource: "*"
+          - Effect: Allow
+            Action:
+              - sts:GetCallerIdentity
+            Resource: "*"
+
+  WorkshopAdminIamPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: IamLimitedAccess
+      Roles:
+        - !Ref WorkshopAdminRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - iam:CreateInstanceProfile
+              - iam:DeleteInstanceProfile
+              - iam:GetInstanceProfile
+              - iam:RemoveRoleFromInstanceProfile
+              - iam:GetRole
+              - iam:CreateRole
+              - iam:DeleteRole
+              - iam:AttachRolePolicy
+              - iam:PutRolePolicy
+              - iam:UpdateAssumeRolePolicy
+              - iam:AddRoleToInstanceProfile
+              - iam:ListInstanceProfilesForRole
+              - iam:PassRole
+              - iam:DetachRolePolicy
+              - iam:DeleteRolePolicy
+              - iam:GetRolePolicy
+              - iam:GetOpenIDConnectProvider
+              - iam:CreateOpenIDConnectProvider
+              - iam:DeleteOpenIDConnectProvider
+              - iam:TagOpenIDConnectProvider
+              - iam:ListAttachedRolePolicies
+              - iam:TagRole
+              - iam:UntagRole
+              - iam:GetPolicy
+              - iam:CreatePolicy
+              - iam:DeletePolicy
+              - iam:ListPolicyVersions
+            Resource:
+              - !Sub "arn:aws:iam::${AWS::AccountId}:instance-profile/eksctl-*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/eksctl-*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:policy/eksctl-*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/eksctl-managed-*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/AmazonEKSAutoClusterRole*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/AmazonEKSAutoNodeRole*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/NirmataControlHubRole*"
+          - Effect: Allow
+            Action:
+              - iam:GetRole
+              - iam:GetUser
+            Resource:
+              - !Sub "arn:aws:iam::${AWS::AccountId}:role/*"
+              - !Sub "arn:aws:iam::${AWS::AccountId}:user/*"
+          - Effect: Allow
+            Action:
+              - iam:CreateServiceLinkedRole
+            Resource: "*"
+            Condition:
+              StringEquals:
+                iam:AWSServiceName:
+                  - eks.amazonaws.com
+                  - eks-nodegroup.amazonaws.com
+                  - eks-fargate.amazonaws.com
+                  - eks-auto.amazonaws.com
 
   WorkshopLambdaExecutionRole:
     Type: AWS::IAM::Role
@@ -413,24 +524,23 @@ Resources:
             Principal:
               Service:
                 - lambda.amazonaws.com
-                - codebuild.amazonaws.com
             Action:
               - 'sts:AssumeRole'
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
-        - arn:aws:iam::aws:policy/AWSCodeBuildAdminAccess
       Policies:
-        - PolicyName: !Sub IAMPolicy-${AWS::StackName}
+        - PolicyName: !Sub TriggerBuildPolicy-${AWS::StackName}
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Action:
-                    - codebuild:StartBuild
-                    - codebuild:BatchGetBuilds
-                    - codebuild:ListBuildsForProject
-                    - codebuild:BatchGetProjects
-                    - codebuild:StopBuild
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*"
+              - Effect: Allow
+                Action:
+                  - codebuild:StartBuild
+                  - codebuild:BatchGetBuilds
                 Resource: !GetAtt BuildProject.Arn
 
   TriggerBuildLambda:

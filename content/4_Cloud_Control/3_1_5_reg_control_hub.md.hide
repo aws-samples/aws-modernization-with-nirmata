@@ -13,5 +13,5 @@ Once registered, Nirmata Control Hub will onboard the cloud account and all poli
 
 Go to _Nirmata Control Hub > Policy Reports > Cloud > cloud-control-workshop_
 
-![Nirmata Control Hub - CCP](/static/images/nch-ccp-workshop.png)
+:image[Nirmata Control Hub - Cloud Control Point reports]{src="/static/images/nch-ccp-workshop.png" width=900}
 

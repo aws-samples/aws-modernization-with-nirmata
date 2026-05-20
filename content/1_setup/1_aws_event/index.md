@@ -18,19 +18,19 @@ Follow the steps below to gain access to your Workshop Studio AWS account:
 
 2. Choose your preferred sign-in method. For AWS guided events, choose Email OTP.
 
-   ![Studio Signin](/static/images/sign-in.png)
+   :image[Workshop Studio sign-in options]{src="/static/images/sign-in.png"}
 
 3.  Enter the code provided by the event organizer into the text box. You will usually find this code on a slide that is being shown, or a paper printout at your table.
 
-   ![Enter Code](/static/images/enter-access-code.png)
+   :image[Enter event access code]{src="/static/images/enter-access-code.png"}
 
 3. The page shows the event details and presents the Terms and Conditions of the workshop. Review and check the box at the bottom of the page if you agree, then click the **Join event** button.
 
-   ![Review Terms](/static/images/workshop-studio-review-terms.png)
+   :image[Review and accept terms and conditions]{src="/static/images/workshop-studio-review-terms.png" width=900}
 
 4. Your event dashboard should be presented.  On the left margin, click the "Open AWS console" link.
  
-   ![Open AWS Console](/static/images/workshop-studio-open-console.png)
+   :image[Open AWS Console from event dashboard]{src="/static/images/workshop-studio-open-console.png"}
 
 ::alert[This account will expire at the end of the workshop and  all the resources created will be automatically de-provisioned. You will not be able to access this account after today.]{type="warning"}
 

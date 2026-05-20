@@ -18,7 +18,7 @@ Cluster Control Point provides:
 
 ### What You'll Implement
 In this section, you'll:
-- Register your Kubernetes cluster with Nirmata Control Hub
+- Register your EKS cluster with Nirmata Control Hub
 - Deploy the Nirmata Controller to enable policy enforcement
 - Apply policy sets for security and compliance
 - View and analyze policy violation reports
@@ -27,4 +27,4 @@ By the end of this section, you'll have a fully governed Kubernetes cluster with
 
 Let's begin by registering your cluster with Nirmata Control Hub.
 
-![Register an Existing Kubernetes Cluster](/static/images/register.jpg)
+:image[Register an Existing Kubernetes Cluster]{src="/static/images/register.jpg" width=900}

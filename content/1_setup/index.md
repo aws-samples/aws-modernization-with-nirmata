@@ -13,14 +13,14 @@ The workshop infrastructure will be automatically deployed using AWS CloudFormat
 - **AWS Guided Event**: If you're attending an AWS-hosted workshop, follow the setup instructions [here](/1-setup/1-aws-event.html).
 - **Self-Paced Learning**: If you're running this workshop independently, follow the setup instructions [here](/1-setup/2-self-paced.html).
 
-## What Gets Deployed during the Workshop
+## What gets deployed during the workshop?
 
-During the workshop the folloing infrastructure will be provisioned:
+During the workshop the following infrastructure will be provisioned:
 
-✅ **Amazon EKS Cluster** with EKS Auto Mode enabled  
+✅ **[Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (Amazon EKS)** cluster with EKS Auto Mode enabled  
 ✅ **VS Code on EC2** for AWS events, optional for self-paced lab
 
-## What You'll Configure During the Workshop
+## What will you configure during the workshop?
 
 🔧 **Nirmata Account** and generate new API token  
 🔧 **Nirmata Command Line Interface** with your Nirmata API token  

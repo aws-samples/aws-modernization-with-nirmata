@@ -17,7 +17,7 @@ While Kubernetes admission controllers like Kyverno can secure your clusters, th
 
 In the following sections, you'll set up Cloud Control Point for AWS and see how it prevents common misconfigurations that could lead to security vulnerabilities or compliance violations.
 
-### What You'll Implement (Comming Soon!)
+### What You'll Implement (Coming Soon!)
 - Pod identity configuration for secure AWS access
 - Cloud Control Point deployment via Helm
 - Cloud admission controller setup

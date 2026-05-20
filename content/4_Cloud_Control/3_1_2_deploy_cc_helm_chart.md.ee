@@ -39,7 +39,7 @@ kubectl get pods -n nirmata
 ```
 
 The output should display the running pods:
-![Nirmata Cloud Control Pods](/static/images/nirmata-cloud-control-pods.png)
+:image[Nirmata Cloud Control running pods]{src="/static/images/nirmata-cloud-control-pods.png"}
 
 ### View Policies and Account Information
 

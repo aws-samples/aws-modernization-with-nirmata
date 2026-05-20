@@ -34,7 +34,6 @@
                 "iam:GetInstanceProfile",
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:AddRoleToInstanceProfile",
-                "iam:PassRole",
                 "iam:TagRole",
                 "iam:TagOpenIDConnectProvider",
                 "iam:AttachRolePolicy",
@@ -45,6 +44,22 @@
                 "arn:aws:iam::*:oidc-provider/*",
                 "arn:aws:iam::*:instance-profile/*"
             ]
+        },
+        {
+            "Sid": "IAMPassRole",
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::*:role/*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": [
+                        "codebuild.amazonaws.com",
+                        "lambda.amazonaws.com",
+                        "ec2.amazonaws.com",
+                        "eks.amazonaws.com"
+                    ]
+                }
+            }
         },
         {
             "Sid": "LambdaPermissions",

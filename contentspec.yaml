@@ -9,7 +9,7 @@ localeCodes:
 # using the params directive.
 params:
   author: Marina Novikova
-  description: Nirmata & AWS - Modernization Workshop
+  description: This hands-on workshop guides you through implementing comprehensive Kubernetes and AWS resources governance and compliance using Nirmata Control Hub. You'll learn how to establish policy-based controls across your entire Kubernetes ecosystem - from cloud infrastructure to clusters to CI/CD pipelines.
 
 # List of links to display in the workshop guide. Will be rendered on the left hand side navigation menu.
 additionalLinks:
@@ -19,11 +19,13 @@ additionalLinks:
 # START Infrastructure
 infrastructure:
   cloudformationTemplates:
-    - templateLocation: static/infrastructure/vscode_server.yaml
-      label: VS Code
+    - templateLocation: static/infrastructure/code-editor.yaml
+      label: CodeEditor
+      parameters:
+        - templateParameter: RepoUrl
+          defaultValue: https://github.com/nirmata/demo-resources
       participantVisibleStackOutputs:
-        - URL
-        - Password   
+        - URL 
         
     - templateLocation: static/infrastructure/eks-cluster.yaml
       label: EKS Cluster for the workshop
@@ -42,7 +44,6 @@ awsAccountConfig:
       - static/iam_policy.json
     managedPolicies:
       - "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
-      - "arn:aws:iam::aws:policy/AdministratorAccess"
     trustedPrincipals:
       service:
         - ec2.amazonaws.com

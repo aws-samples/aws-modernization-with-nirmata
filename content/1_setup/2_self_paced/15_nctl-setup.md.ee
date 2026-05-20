@@ -41,9 +41,9 @@ You can also refer to the [documentation](https://downloads.nirmata.io/nctl/stab
 
 Log in to [Nirmata](https://nirmata.io/security/login.html), go to *Settings → Profile*, click **Generate API Key** and copy the nctl login command to authenticate nctl with Nirmata.
 
-![nctl login command](/static/images/nctl-createapikey.png)
+:image[Generate API Key in Nirmata]{src="/static/images/nctl-createapikey.png" width=900}
 
-![nctl login command](/static/images/nctl-copy.png)
+:image[Copy nctl login command]{src="/static/images/nctl-copy.png" width=900}
 
 Enter this command in the VS Code Server
 

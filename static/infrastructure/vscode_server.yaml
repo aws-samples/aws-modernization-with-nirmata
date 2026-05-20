@@ -57,7 +57,7 @@ Parameters:
     Default: 'demo-aws-cluster'
   NCTLVersion:
     Type: String
-    Default: 'nctl_4.8.0-rc.2_linux_arm64'
+    Default: 'nctl_4.10.14_linux_arm64'
 
 Conditions:
   IsAL2023: !Equals [!Ref InstanceOperatingSystem, 'AmazonLinux-2023']

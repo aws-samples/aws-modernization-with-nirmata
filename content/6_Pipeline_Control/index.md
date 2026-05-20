@@ -11,7 +11,7 @@ Now that you've secured both your cloud infrastructure and Kubernetes clusters, 
 ### The Value of Pipeline Scanning
 By integrating policy checks into your CI/CD pipelines, you can:
 
-1. **Catch issues early**: Identify policy violations during development, not production
+1. **Identify issues early**: Detect policy violations during development, not production
 2. **Accelerate feedback loops**: Give developers immediate feedback on policy compliance
 3. **Reduce remediation costs**: Fix issues when they're cheapest to address
 4. **Maintain deployment velocity**: Prevent non-compliant changes from slowing down releases
@@ -28,7 +28,7 @@ In this section, you'll:
 
 [nctl scan](https://docs.nirmata.io/docs/nctl/commands/nctl_scan_repository/) can be used within the local CLI environment; however, its true potential is unlocked when utilized within CI pipelines to scan code repositories.
 
-![Scan Action Workflow](/static/images/scan_action_workflow.png)
+:image[Scan Action Workflow]{src="/static/images/scan_action_workflow.png" width=900}
 
 The platform or security team admins are responsible for defining the policies that an organization needs to adhere to. They are stored as YAML files in Git repositories or as OCI images in the OCI registry, or also are made available as Helm charts. The DevOps user or the IT team is responsible for managing the configuration files, be it a Kubernetes manifest, or an IaC file, or any JSON spec stored in Git repositories.
 

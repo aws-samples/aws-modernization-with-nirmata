@@ -49,7 +49,7 @@ To see pipeline scanning with Jenkins CI in action:
 
 4. Enter the name of the job. Select `Freestyle project` from the list of options to choose from and click `OK`.
 
-![image](/static/images/jenkins-job-initiate.png)
+:image[Jenkins new item - create freestyle project]{src="/static/images/jenkins-job-initiate.png" width=900}
 
 5. Now that the job is created, it needs to be configured accordingly for the pipeline scanning to take place. To do so:
 
@@ -77,15 +77,15 @@ To see pipeline scanning with Jenkins CI in action:
 
     k. Finally, click **Save** to complete the job configuration.
 
-![image](/static/images/job-configure.png)
+:image[Jenkins job configuration]{src="/static/images/job-configure.png" width=900}
 
 6. Next, click on **Build Now** on the left hand side navigation bar to run the job. This will trigger the pipeline scan and the process can be seen under `Build History` located on the left hand lower corner of the screen.
 
-![image](/static/images/job-build.png)
+:image[Jenkins Build Now and Build History]{src="/static/images/job-build.png" width=900}
 
 7. Now, click on the build number under **Build History** to see details on the completion of the job. The status page will open by default where the information on the success or the failure of the job will be visible.
 8. Click on **Console Output** on the navigation bar to have a look at the scan results.
 
-![image](/static/images/job-output.png)
+:image[Jenkins console output with scan results]{src="/static/images/job-output.png" width=900}
 
 9. Scroll down to the end of the page to verify the publishing of the report to the NCH tenant.

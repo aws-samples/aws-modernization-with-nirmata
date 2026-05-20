@@ -21,9 +21,9 @@ NCH addresses these challenges through a unified approach to policy management a
 2. **Cluster Control Point**: Enforces policies across Kubernetes clusters in runtime
 3. **Pipeline Control Point**: Shifts security left by validating configurations in CI/CD pipelines
 
-![npm dashboard](/static/images/nch_overview.jpg)
+:image[Nirmata Control Hub overview]{src="/static/images/nch_overview.JPG" width=900}
 
-![npm dashboard](/static/images/npm-dashboard-new.png)
+:image[Nirmata Control Hub dashboard]{src="/static/images/npm-dashboard-new.png" width=900}
 
 In this workshop, you'll implement each of these control points and learn how they work together to create a comprehensive governance framework for your Kubernetes environments.
 

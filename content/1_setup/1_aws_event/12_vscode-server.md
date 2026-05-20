@@ -4,39 +4,29 @@ chapter: false
 weight: 22
 ---
 
-#### Step 1: Locate Your Credentials
+#### Step 1: Launch VS Code Server
 
-1. Navigate to the **Event Outputs** section in the workshop portal
-2. Look for two important pieces of information:
-   - **URL**: Your unique VS Code server URL
-   - **Password**: Your secure access credentials
-
-![Event Outputs Location](/static/images/nirmata-outputs.png)
-
-#### Step 2: Launch VS Code Server
-
+1. Navigate to the **Event Outputs** section in the workshop portal and ook for your unique VS Code server URL
 1. Click the **URL** link in Event Outputs
-2. A new browser tab will open with the VS Code login screen
-3. Copy the password from Event Outputs
-4. Paste it into the password field
-5. Click **SUBMIT**
 
-![VS Code Login Screen](/static/images/Vscode-server-login.png)
+:image[Event Outputs section in workshop portal]{src="/static/images/event-output.png" width=900}
 
-#### Step 3: Verify Your Connection
+#### Step 2: Verify Your Connection
 
 Once logged in, you should see the VS Code interface:
 - A file explorer on the left
 - An editor panel in the center
 - A terminal at the bottom (if not visible, press `` Ctrl + ` `` to open it)
 
-![VS Code Interface](/static/images/vs-code.png)
+:image[VS Code interface with explorer, editor, and terminal]{src="/static/images/vs-code.png" width=900}
 
-#### Steo 4: Update Kubeconfig with pre-provisioned EKS cluster
+#### Step 3: Update Kubeconfig with pre-provisioned EKS cluster
 
 ```bash
 aws eks update-kubeconfig --name demo-aws-cluster --region us-west-2
 ```
+
+After running this command, your terminal should display a confirmation message indicating that the kubeconfig has been updated. You are now connected to the EKS cluster and can run `kubectl` commands against it for the remainder of the workshop.
 
 ### Important Notes
 
